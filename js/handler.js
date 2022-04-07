@@ -4,9 +4,7 @@
 const instruments = [];
 
 /*ID'шники инструментов*/
-const ids = ['cursor', 'hand', 'pen', 'text',
-    'line', 'ellipse', 'rect', 'polygon',
-    'brush', 'eraser', 'pipette', 'zoom'];
+const ids = ['cursor', 'hand',  'polygon'];
 
 /*Текущий выбранный инструмент*/
 let currentInstrument = null;
