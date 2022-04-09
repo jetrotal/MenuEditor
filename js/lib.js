@@ -4,6 +4,17 @@
 function changeLabelSelected() {
     const label = document.getElementById("selected-instrument");
     label.innerText = currentInstrument.alt;
+
+    let el = document.getElementById("selected-counter-label");
+    if (el){
+        el.parentNode.removeChild(el);
+        el = document.getElementById("select-counter");
+        el.parentNode.removeChild(el);
+    }
+
+    if(currentInstrument.alt == "Курсор"){
+        document.getElementById("selected-instrument-block").innerHTML += '<b id="selected-counter-label">Выбранных элементов:</b><div id="select-counter">'+selectedFigures.length+'</div>';
+    }
 }
 
 /*Функция, возвращающая координаты объемлющего элемента*/

@@ -24,7 +24,9 @@
       </div>
       <div id="selected-instrument-block">
         <b id="selected-instrument-label">Выбранный инструмент:</b>
-        <b id="selected-instrument">Курсор</b>
+        <b id="selected-instrument">Курсор </b>
+          <b id="selected-counter-label">Выбранных элементов:</b>
+          <div id='select-counter'>0</div>
       </div>
       <div id="options">
           <div id="options-line">
@@ -249,6 +251,16 @@
                 </ul>
             </div>
       </div>
+      <div id="right-panel">
+          <table>
+              <row>
+                  <td><b id="group-text">Группы</b></td>
+                  <td><button id="create-group" class="button" onclick="createGroup()">
+                      <i class="fa fa-plus-square" aria-hidden="true"></i>
+                  </button></td>
+              </row>
+          </table>
+      </div>
       <div id="back-panel">
         <div id="draw-panel">
           <svg id="svg-panel" width="900" height="500"
@@ -287,10 +299,8 @@
                 document.getElementById('color').style.color = hex;
             });
         colorPicker.addEventListener('click', () => {
-            if (currentFigure !== null && !(currentFigure instanceof BrushBox) && !(currentFigure instanceof Line)) {
+            if (currentFigure !== null) {
                 currentFigure.svgFig.setAttribute('fill', paletteColor);
-            }else if (currentFigure !== null && ((currentFigure instanceof BrushBox) || (currentFigure instanceof Line))) {
-                currentFigure.svgFig.setAttribute('stroke', paletteColor);
             }
         });
         cp.setHex(paletteColor);

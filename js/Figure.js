@@ -1,9 +1,6 @@
 'use strict';
 
 const cursor = document.getElementById('cursor');
-const pen = document.getElementById('pen');
-const rect = document.getElementById('rect');
-const ellipse = document.getElementById('ellipse');
 const polygon = document.getElementById('polygon');
 
 /* Отобразить панель опций фигуры, по которой произойдет клик: */
@@ -21,6 +18,7 @@ document.addEventListener('keydown', (e) => {
         svgPanel.removeChild(currentFigure.svgFig);
         currentFigure.svgFig = null;
         currentFigure = null;
+        selectedFigures = [];
     }
 });
 
@@ -59,26 +57,43 @@ class Figure {
             return this.svgFig !== null && !this.somePointTaken && !someFigureTaken;
         }).bind(this);
 
-        const hide = ( () => {
+        const hide = ( (e) => {
+            if (e.ctrlKey) {
+            } else
             if (this.isShowing && this.svgFig !== null) {
                 this.hideRefPoints();
+
+                selectedFigures.splice(selectedFigures.indexOf(this), 1);
+
                 if (currentFigure == this) {
+
                     if (cursor.checked) {
                         hideAllOptions();
                     }
                     currentFigure = null;
+
                 }
                 this.isShowing = false;
             }
+            this.refreshSelectedFiguresCounter();
+
         } ).bind(this);
         drawPanel.addEventListener('mousedown', hide);
 
-        this.svgFig.addEventListener('mousedown', ( () => {
-            if (check() && !this.isShowing && cursor.checked) {
-                this.showRefPoints();
-                this.showOptions();
-                currentFigure = this;
-                this.isShowing = true;
+        this.svgFig.addEventListener('mousedown', ( (e) => {
+            if(this.isShowing){
+                this.hideRefPoints();
+                this.isShowing = false;
+                selectedFigures.splice(selectedFigures.indexOf(this), 1);
+            } else {
+                if (check() && !this.isShowing && cursor.checked) {
+                    selectedFigures.push(this);
+                    this.showRefPoints();
+                    this.showOptions();
+                    currentFigure = this;
+                    this.isShowing = true;
+                    this.refreshSelectedFiguresCounter();
+                }
             }
         } ).bind(this));
 
@@ -92,6 +107,17 @@ class Figure {
                 drawPanel.addEventListener('mousedown', hide);
             }
         });
+    }
+
+    refreshSelectedFiguresCounter() {
+        let el = document.getElementById("selected-counter-label");
+        if (el){
+            el.parentNode.removeChild(el);
+            el = document.getElementById("select-counter");
+            el.parentNode.removeChild(el);
+        }
+        document.getElementById("selected-instrument-block").innerHTML += '<b id="selected-counter-label">Выбранных элементов:</b><div id="select-counter">'+selectedFigures.length+'</div>';
+
     }
 
     createTmpCopy() {}
