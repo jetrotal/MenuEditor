@@ -12,6 +12,9 @@ let currentInstrument = null;
 /*Текущие выбранные фигуры*/
 let selectedFigures = [];
 
+/*Действующие группы*/
+let groups = [];
+
 /*Текущая выделенная фигура*/
 let currentFigure = null;
 

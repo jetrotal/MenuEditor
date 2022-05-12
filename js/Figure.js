@@ -13,6 +13,10 @@ cursor.addEventListener('click', () => {
 /* Удаление выделенной фигуры при помощи клавиши Delete: */
 document.addEventListener('keydown', (e) => {
     if (e.keyCode == 46 && currentFigure !== null && !currentFigure.somePointTaken && !someFigureTaken) {
+        if(currentFigure.groupID != "0"){
+            let group = svgPanel.getElementById(currentFigure.groupID);
+            group.remove();
+        }
         showOptions();
         currentFigure.hideRefPoints();
         svgPanel.removeChild(currentFigure.svgFig);
@@ -75,8 +79,11 @@ class Figure {
                 }
                 this.isShowing = false;
             }
-            this.refreshSelectedFiguresCounter();
+            Figure.refreshSelectedFiguresCounter();
 
+            if(selectedFigures.length < 2){
+                document.getElementById("create-group").parentNode.hidden = true;
+            }
         } ).bind(this);
         drawPanel.addEventListener('mousedown', hide);
 
@@ -92,8 +99,11 @@ class Figure {
                     this.showOptions();
                     currentFigure = this;
                     this.isShowing = true;
-                    this.refreshSelectedFiguresCounter();
+                    Figure.refreshSelectedFiguresCounter();
                 }
+            }
+            if(selectedFigures.length >= 2){
+                document.getElementById("create-group").parentNode.hidden = false;
             }
         } ).bind(this));
 
@@ -109,16 +119,9 @@ class Figure {
         });
     }
 
-    refreshSelectedFiguresCounter() {
-        let el = document.getElementById("selected-counter-label");
-        if (el){
-            el.parentNode.removeChild(el);
-            el = document.getElementById("select-counter");
-            el.parentNode.removeChild(el);
-        }
-        document.getElementById("selected-instrument-block").innerHTML += '<b id="selected-counter-label">Выбранных элементов:</b><div id="select-counter">'+selectedFigures.length+'</div>';
 
-    }
+
+
 
     createTmpCopy() {}
 
@@ -143,6 +146,17 @@ class Figure {
                 update();
             }
         });
+    }
+
+    static refreshSelectedFiguresCounter() {
+        let el = document.getElementById("selected-counter-label");
+        if (el){
+            el.parentNode.removeChild(el);
+            el = document.getElementById("select-counter");
+            el.parentNode.removeChild(el);
+        }
+        document.getElementById("selected-instrument-block").innerHTML += '<b id="selected-counter-label">Выбранных элементов:</b><div id="select-counter">'+selectedFigures.length+'</div>';
+
     }
 }
 

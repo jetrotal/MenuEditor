@@ -232,35 +232,34 @@
         <input type="radio" alt="Многоугольник" id="polygon" name="instruments">
         <label for="polygon"><i class="fas fa-star" aria-hidden="true"></i></label>
 
-
         <button id="button-color" class="button"><i id="color" class="fa fa-square" aria-hidden="true"></i></button>
-        <div id="color-picker" class="cp-default">
-                <div class="picker-wrapper">
-                    <div id="picker" class="picker"></div>
-                    <div id="picker-indicator" class="picker-indicator"></div>
-                </div>
-                <div class="pcr-wrapper">
-                    <div id="pcr" class="pcr"></div>
-                    <div id="pcr-indicator" class="pcr-indicator"></div>
-                </div>
-                <ul id="color-values">
-                    <div id="pcr_bg"></div>
-                    <li><label>RGB:</label><span id="rgb"></span></li>
-                    <li><label>HSV:</label><span id="hsv"></span></li>
-                    <li><label>HEX:</label><span id="hex"></span></li>
-                </ul>
-            </div>
-      </div>
-      <div id="right-panel">
+
           <table>
               <row>
-                  <td><b id="group-text">Группы</b></td>
-                  <td><button id="create-group" class="button" onclick="createGroup()">
-                      <i class="fa fa-plus-square" aria-hidden="true"></i>
+
+                  <td hidden = "true"><button id="create-group" class="button" >
+                      <i class="fa fa-plus-square" aria-hidden="true"></i>G
                   </button></td>
               </row>
           </table>
+          <div id="color-picker" class="cp-default">
+              <div class="picker-wrapper">
+                  <div id="picker" class="picker"></div>
+                  <div id="picker-indicator" class="picker-indicator"></div>
+              </div>
+              <div class="pcr-wrapper">
+                  <div id="pcr" class="pcr"></div>
+                  <div id="pcr-indicator" class="pcr-indicator"></div>
+              </div>
+              <ul id="color-values">
+                  <div id="pcr_bg"></div>
+                  <li><label>RGB:</label><span id="rgb"></span></li>
+                  <li><label>HSV:</label><span id="hsv"></span></li>
+                  <li><label>HEX:</label><span id="hex"></span></li>
+              </ul>
+          </div>
       </div>
+
       <div id="back-panel">
         <div id="draw-panel">
           <svg id="svg-panel" width="900" height="500"
@@ -300,10 +299,55 @@
             });
         colorPicker.addEventListener('click', () => {
             if (currentFigure !== null) {
-                currentFigure.svgFig.setAttribute('fill', paletteColor);
+                if(currentFigure.groupID == "0") {
+                    currentFigure.svgFig.setAttribute('fill', paletteColor);
+                } else {
+
+                    let figures = svgPanel.getElementById(currentFigure.groupID).childNodes;
+                    for(let i = 0; i < figures.length; i++){
+                        figures[i].setAttribute('fill', paletteColor);
+                    }
+                }
             }
         });
         cp.setHex(paletteColor);
+
+        document.getElementById("create-group").addEventListener('click', ()=>{
+            // отменить группировку, если хоть один элемент уже сгруппирован
+            for(let i = 0; i < selectedFigures.length; i++){
+                if (selectedFigures[i].groupID !== "0"){
+                    alert("Группировка невозможна, один из выбранных элементов относится к той или иной группе");
+                    return;
+                }
+            }
+            // группировка элементов
+            let groups = document.getElementsByTagName("g");
+            let groupID = selectedFigures[0].groupID;
+            for(let i = 0; i < groups.length; i++) {
+                if(groupID < groups[i].getAttribute("id")){
+                    groupID = groups[i].getAttribute("id");
+                }
+            }
+            groupID++;
+
+
+            let group = document.createElementNS(svgNS, "g");
+            group.setAttribute("id", groupID);
+            for(let i = 0; i < selectedFigures.length; i++){
+                selectedFigures[i].groupID = groupID;
+
+                //selectedFigures[i].hideRefPoints();
+                svgPanel.removeChild(selectedFigures[i].svgFig);
+                group.appendChild(selectedFigures[i].svgFig);
+                //selectedFigures[i].hideOrShow();
+            }
+            selectedFigures = [];
+            Figure.refreshSelectedFiguresCounter();
+            //svgPanel.insertBefore(group, svgPanel);
+            svgPanel.appendChild(group);
+
+        });
+
     </script>
   </body>
 </html>

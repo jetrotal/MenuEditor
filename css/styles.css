@@ -24,7 +24,7 @@ main {
   display: flex;
 }
 #left-panel {
-  width: 45px;
+  width: 50px;
   height: 100%;
   margin-top: 45px;
   background-color: #01121d;
@@ -301,7 +301,7 @@ header div {
 }
 
 #color-picker{
-    margin: 25px auto;
+    margin: 100px auto;
     width: 400px;
     position: relative;
     display: flex;
