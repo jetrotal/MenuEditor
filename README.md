@@ -1,37 +1,37 @@
-## svgEditor - векторный графический редактор на JavaScript, взятый за основу у [этих ребят](https://github.com/bmstu-iu9/utp2018-9-vector-editor)
+## svgEditor is a JavaScript vector-based graphics editor based on [these guys](https://github.com/bmstu-iu9/utp2018-9-vector-editor)
 ![svgEditor](https://image.ibb.co/dmqRgd/svg_Editor.png)
-### Инструменты документа:
-* Инструмент Новый холст
-  > Создает новый холст
-* Импорт SVG
-  > Позволяет загрузить в редактор уже ранее созданный хост для редактирования
-* Экспорт SVG
-  > Позволяет выгрузить холст для хранения или передачи
-### Инструменты холста:
-* Инструмент `Курсор` 
-  > Используется для выделения фигуры, перемещения, изменения ее размеров
-* Инструмент `Рука` 
-  > Позволяет перемещать холст
-* Инструмент `Многоугольник`
-  > Позволяет нарисовать многоугольник
-* Инструмент `Цвет`
-  > Открывает палитру и позволяет управлять цветом
-* Инструмент `Группировка`
-  > Группирует фигуры. Теперь любые преобразования фигуры переносятся на фигуры той же группы.
-### Функции:
-* Перемещение фигуры
-  > Выделить фигуру -> взять за центр и переместить в произвольную область экрана
-* Изменение размеров и положение углов фигуры
-  > Выделить фигуру -> взять за один из краев, начать перемещать
-* Изменение цвета фигуры
-  > Выделить фигуру -> Инструмент `Цвет` -> выбрать произвольный цвет
-* Удаление фигуры
-  > Выделить фигуру -> Нажать на клавиатуре `Delete`
-* Группировка фигур
-  > Выделить несколько фигур, зажимая на клавиатуре `Ctrl`, после чего нажать на кнопку `+G`. Нажмите на пустое место на экране, чтобы успешно продолжать работать с холстом дальше
-* Работа с группами фигур
-  > Работая с группой фигур, вам достаточно изменить свойства одной фигуры в группе, чтобы остальные фигуры сделали то же самое(`Перемещение`, `изменение` размеров, `цвета`, `удаление` фигур)
+### Document tools:
+* New Canvas tool.
+  > Creates a new canvas
+* Import SVG
+  > Allows you to load a previously created canvas into the editor for editing
+* Export SVG
+  > Allows you to unload a canvas for storage or transfer
+### Canvas Tools:
+* The `Cursor` tool. 
+  > Used to select a shape, move it, resize it
+* Hand tool 
+  > Allows you to move the canvas
+* Tool `Multiangle` > Allows you to draw a polygon
+  > Allows you to draw a polygon
+* Tool `Color`.
+  > Opens the palette and allows you to control the color
+* Tool `Group tool
+  > Groups the shapes. Any transformation of a shape is now transferred to shapes of the same group.
+### Functions:
+* Move Shape.
+  > Select a shape -> grab it by its center and move it to an arbitrary area of the screen
+* Change size and position of a shape.
+  > Select a shape -> grab one of the edges and move it around
+* Changing a shape's color
+  > Select a shape -> use `Color Tool` -> select an arbitrary color.
+* Deleting a shape
+  > Select a shape -> Press `Delete` on your keyboard.
+* Grouping of shapes
+  > Select multiple shapes by pressing `Ctrl` on the keyboard, then press the `+G` button. Click on the empty space on the screen to continue working with the canvas successfully
+* Working with groups of shapes
+  > When working with a group of shapes, you only have to change the properties of one shape in the group for the other shapes to do the same (`Move`, `change` dimensions, `color`, `delete` shapes)
   
-  > Внимание! Изменение группы фигур работает не совсем очевидным образом. Например, изменение треугольников лишь тогда будет синхронным, если потянуть лишь за один их трех углов 
+  > Warning: Changing a group of shapes doesn't work in a very obvious way. For example, changing triangles is only synchronous if you drag just one of their three corners. 
 
-По всем вопросам пишите на VanekMRZ@yandex.ru c темой svgEditor
+If you have any questions, write to VanekMRZ@yandex.ru with the subject svgEditor
