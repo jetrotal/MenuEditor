@@ -46,7 +46,7 @@ class Rectangle extends Figure {
         const options = optionsRect.getElementsByTagName('input');
         let el = createSVGElem('foreignObject', undefined, '#000000', 0);
         el.innerHTML = `<div id="menuBG">
-      <textarea id="teste" class="border" disabled="" style="height: 47px; width: 147px;"></textarea>
+      <div class="border"></div>
     </div>`;
 
         const rectangle = new Rectangle(el);
