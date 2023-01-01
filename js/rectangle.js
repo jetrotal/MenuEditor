@@ -274,13 +274,7 @@ class Rectangle extends Figure {
     }
 
     createTmpCopy() {
-let el = createSVGElem('foreignObject', 'none', '#000000', '1', '0.5', '0.5');
-        el.innerHTML = `<div id="menuBG">
-      <div class="border"></div>
-    </div>`;
-
-  
-        this.copy = el
+        this.copy = createSVGElem('rect', 'none', '#000000', '1', '0.5', '0.5');
         this.copy.setAttribute('x', this.x);
         this.copy.setAttribute('y', this.y);
         this.copy.setAttribute('width', this.width);
