@@ -45,6 +45,9 @@ class Rectangle extends Figure {
         let moving = false;
         const options = optionsRect.getElementsByTagName('input');
         const rectangle = new Rectangle(createSVGElem('foreignObject', undefined, '#000000', 0));
+        Rectangle.innerHTML = `<div id="menuBG">
+      <textarea id="teste" class="border" disabled="" style="height: 47px; width: 147px;"></textarea>
+    </div>`
         ({ x: rectangle.x, y: rectangle.y } = click);
         rectangle.r = +options[0].value;
         svgPanel.appendChild(rectangle.svgFig);
