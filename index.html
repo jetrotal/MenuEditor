@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html lang="ru" dir="ltr">
-  <head>
+<html lang="en" dir="ltr" class="translated-ltr"><head>
     <meta charset="utf-8">
-    <title>svgEditor - векторный онлайн редактор</title>
+    <title>svgEditor - online vector editor</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  </head>
-  <body>
+  <link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"></head>
+  <body style="">
     <header>
-      <p id="logo"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i><b>svgEditor</b></p>
+      <p id="logo"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">svgEditor</font></font></b></p>
       <div class="top-buttons-group">
         <button id="creature" class="button" onclick="createSVGPanel()">
           <i class="fa fa-plus-square" aria-hidden="true"></i>
         </button>
         <button class="button" onclick="document.getElementById('file-input').click();">
-            <input id="file-input" accept="image/svg+xml" type="file" name="name" style="display: none;" />
+            <input id="file-input" accept="image/svg+xml" type="file" name="name" style="display: none;">
             <i class="fa fa-folder" aria-hidden="true"></i>
         </button>
         <button id="save" class="button" onclick="saveSVG()">
@@ -23,198 +22,198 @@
         </button>
       </div>
       <div id="selected-instrument-block">
-        <b id="selected-instrument-label">Выбранный инструмент:</b>
-        <b id="selected-instrument">Курсор</b>
+        <b id="selected-instrument-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Selected tool:</font></font></b>
+        <b id="selected-instrument"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cursor</font></font></b>
       </div>
       <div id="options">
           <div id="options-line">
               <div class="selector">
-                  <span class="selector-label">Толщина линии, px:</span>
-                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <span class="selector-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Line thickness, px:</font></font></span>
+                  <input style="width: 35px;" type="text" class="selector-field">
                   <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
                   <ul class="selector-ul">
-                      <li class="selector-li">1</li>
-                      <li class="selector-li">2</li>
-                      <li class="selector-li">3</li>
-                      <li class="selector-li">4</li>
-                      <li class="selector-li">5</li>
-                      <li class="selector-li">7</li>
-                      <li class="selector-li">10</li>
-                      <li class="selector-li">13</li>
-                      <li class="selector-li">15</li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">one</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">five</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">13</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fifteen</font></font></li>
                   </ul>
               </div>
               <div class="selector">
-                  <span class="selector-label">Длина, px:</span>
-                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <span class="selector-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Length, px:</font></font></span>
+                  <input style="width: 35px;" type="text" class="selector-field">
                   <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
                   <ul class="selector-ul">
-                      <li class="selector-li">10</li>
-                      <li class="selector-li">50</li>
-                      <li class="selector-li">100</li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fifty</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">100</font></font></li>
                   </ul>
               </div>
           </div>
           <div id="options-text">
               <div class="selector">
-                  <span class="selector-label">Шрифт:</span>
-                  <input style="width: 70px;" type="text" class="selector-field" />
+                  <span class="selector-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Font:</font></font></span>
+                  <input style="width: 70px;" type="text" class="selector-field" readonly="">
                   <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
                   <ul class="selector-ul">
-                      <li class="selector-li">Arial</li>
-                      <li class="selector-li">Sans Serif</li>
-                      <li class="selector-li">Open Sans</li>
-                      <li class="selector-li">Roboto</li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Arial</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sans Serif</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Open Sans</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Roboto</font></font></li>
                   </ul>
               </div>
               <div class="selector">
-                  <span class="selector-label">Размер шрифта, pt:</span>
-                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <span class="selector-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Font size, pt:</font></font></span>
+                  <input style="width: 35px;" type="text" class="selector-field" readonly="">
                   <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
                   <ul class="selector-ul">
-                      <li class="selector-li">7</li>
-                      <li class="selector-li">10</li>
-                      <li class="selector-li">12</li>
-                      <li class="selector-li">14</li>
-                      <li class="selector-li">18</li>
-                      <li class="selector-li">22</li>
-                      <li class="selector-li">36</li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">12</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fourteen</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">eighteen</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">22</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">36</font></font></li>
                   </ul>
               </div>
           </div>
-          <div id="options-rect">
+          <div id="options-rect" class="show-option">
               <div class="selector">
-                  <span class="selector-label">Радиус скругления, px:</span>
-                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <span class="selector-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rounding radius, px:</font></font></span>
+                  <input style="width: 35px;" type="text" class="selector-field">
                   <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
                   <ul class="selector-ul">
-                      <li class="selector-li">0</li>
-                      <li class="selector-li">5</li>
-                      <li class="selector-li">7</li>
-                      <li class="selector-li">10</li>
-                      <li class="selector-li">13</li>
-                      <li class="selector-li">15</li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">0</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">five</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">13</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fifteen</font></font></li>
                   </ul>
               </div>
               <div class="selector">
-                  <span class="selector-label">Высота, px:</span>
-                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <span class="selector-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Height, px:</font></font></span>
+                  <input style="width: 35px;" type="text" class="selector-field">
                   <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
                   <ul class="selector-ul">
-                      <li class="selector-li">10</li>
-                      <li class="selector-li">50</li>
-                      <li class="selector-li">100</li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fifty</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">100</font></font></li>
                   </ul>
               </div>
               <div class="selector">
-                  <span class="selector-label">Ширина, px:</span>
-                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <span class="selector-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Width, px:</font></font></span>
+                  <input style="width: 35px;" type="text" class="selector-field">
                   <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
                   <ul class="selector-ul">
-                      <li class="selector-li">10</li>
-                      <li class="selector-li">50</li>
-                      <li class="selector-li">100</li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fifty</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">100</font></font></li>
                   </ul>
               </div>
           </div>
           <div id="options-ellipse">
               <div class="selector">
-                  <span class="selector-label">Высота, px:</span>
-                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <span class="selector-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Height, px:</font></font></span>
+                  <input style="width: 35px;" type="text" class="selector-field">
                   <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
                   <ul class="selector-ul">
-                      <li class="selector-li">10</li>
-                      <li class="selector-li">50</li>
-                      <li class="selector-li">100</li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fifty</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">100</font></font></li>
                   </ul>
               </div>
               <div class="selector">
-                  <span class="selector-label">Ширина, px:</span>
-                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <span class="selector-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Width, px:</font></font></span>
+                  <input style="width: 35px;" type="text" class="selector-field">
                   <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
                   <ul class="selector-ul">
-                      <li class="selector-li">10</li>
-                      <li class="selector-li">50</li>
-                      <li class="selector-li">100</li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fifty</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">100</font></font></li>
                   </ul>
               </div>
           </div>
           <div id="options-polygon">
               <div class="selector">
-                  <span class="selector-label">Количество углов:</span>
-                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <span class="selector-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Number of corners:</font></font></span>
+                  <input style="width: 35px;" type="text" class="selector-field">
                   <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
                   <ul class="selector-ul">
-                      <li class="selector-li">3</li>
-                      <li class="selector-li">4</li>
-                      <li class="selector-li">6</li>
-                      <li class="selector-li">8</li>
-                      <li class="selector-li">10</li>
-                      <li class="selector-li">12</li>
-                      <li class="selector-li">14</li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">eight</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">12</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fourteen</font></font></li>
                   </ul>
               </div>
               <div class="selector">
-                  <span class="selector-label">Радиус:</span>
-                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <span class="selector-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Radius:</font></font></span>
+                  <input style="width: 35px;" type="text" class="selector-field">
                   <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
                   <ul class="selector-ul">
-                      <li class="selector-li">30</li>
-                      <li class="selector-li">40</li>
-                      <li class="selector-li">60</li>
-                      <li class="selector-li">80</li>
-                      <li class="selector-li">100</li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">thirty</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">40</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">60</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">80</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">100</font></font></li>
                   </ul>
               </div>
           </div>
           <div id="options-brush">
               <div class="selector">
-                  <span class="selector-label">Размер кисти, px:</span>
-                  <input style="width: 35px;" type="text" class="selector-field" id="brush_width"/>
+                  <span class="selector-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Brush size, px:</font></font></span>
+                  <input style="width: 35px;" type="text" class="selector-field" id="brush_width">
                   <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
                   <ul class="selector-ul">
-                      <li class="selector-li">1</li>
-                      <li class="selector-li">2</li>
-                      <li class="selector-li">3</li>
-                      <li class="selector-li">4</li>
-                      <li class="selector-li">5</li>
-                      <li class="selector-li">7</li>
-                      <li class="selector-li">10</li>
-                      <li class="selector-li">13</li>
-                      <li class="selector-li">15</li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">one</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">five</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">13</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fifteen</font></font></li>
                   </ul>
               </div>
           </div>
           <div id="options-eraser">
               <div class="selector">
-                  <span class="selector-label">Размер ластика, px:</span>
-                  <input style="width: 35px;" type="text" class="selector-field" id="eraser_width"/>
+                  <span class="selector-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Eraser size, px:</font></font></span>
+                  <input style="width: 35px;" type="text" class="selector-field" id="eraser_width">
                   <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
                   <ul class="selector-ul">
-                      <li class="selector-li">4</li>
-                      <li class="selector-li">5</li>
-                      <li class="selector-li">7</li>
-                      <li class="selector-li">10</li>
-                      <li class="selector-li">13</li>
-                      <li class="selector-li">15</li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">five</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">13</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fifteen</font></font></li>
                   </ul>
               </div>
           </div>
           <div id="options-zoom">
               <div class="selector">
-                  <span class="selector-label">Масштаб:</span>
-                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <span class="selector-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Scale:</font></font></span>
+                  <input style="width: 35px;" type="text" class="selector-field">
                   <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
                   <ul class="selector-ul">
-                      <li class="selector-li">0.25</li>
-                      <li class="selector-li">0.5</li>
-                      <li class="selector-li">0.75</li>
-                      <li class="selector-li">1</li>
-                      <li class="selector-li">1.25</li>
-                      <li class="selector-li">1.5</li>
-                      <li class="selector-li">2</li>
-                      <li class="selector-li">3</li>
-                      <li class="selector-li">4</li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">0.25</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">0.5</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">0.75</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">one</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.25</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.5</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></li>
+                      <li class="selector-li"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></li>
                   </ul>
               </div>
           </div>
@@ -222,15 +221,15 @@
     </header>
     <main>
       <div id="left-panel">
-        <input type="radio" alt="Курсор" id="cursor" name="instruments" checked/>
+        <input type="radio" alt="Cursor" id="cursor" name="instruments" checked="">
         <label for="cursor"><i class="fa fa-mouse-pointer"></i></label>
-        <input type="radio" alt="Рука" id="hand" name="instruments"/>
+        <input type="radio" alt="Hand" id="hand" name="instruments">
         <label for="hand"><i class="fa fa-hand-paper" aria-hidden="true"></i></label>
-        <input type="radio" alt="Перо" id="pen" name="instruments"/>
+        <input type="radio" alt="Feather" id="pen" name="instruments">
         <label for="pen"><i class="fas fa-pen-fancy" aria-hidden="true"></i></label>
-        <input type="radio" alt="Текст" id="text" name="instruments"/>
+        <input type="radio" alt="Text" id="text" name="instruments">
         <label for="text"><i class="fa fa-font" aria-hidden="true"></i></label>
-        <input type="radio" alt="Прямая" id="line" name="instruments"/>
+        <input type="radio" alt="Straight" id="line" name="instruments">
         <label for="line"><i class="fa fa-minus fa-lg" aria-hidden="true" style="transform: rotate(-45deg);"></i></label>
         <ul>
           <li>
@@ -240,46 +239,45 @@
               <i class="fa fa-square" aria-hidden="true" style="transform: scale(0.7, 0.7);"></i>
             </button>
             <ul class="vertical-menu">
-              <input type="radio" alt="Прямоугольник" id="rect" name="instruments">
-              <label for="rect"><i class="fas fa-square-full" aria-hidden="true"></i>Прямоугольник</label>
-              <input type="radio" alt="Эллипс" id="ellipse" name="instruments">
-              <label for="ellipse"><i class="fa fa-circle" aria-hidden="true"></i>Эллипс</label>
-              <input type="radio" alt="Многоугольник" id="polygon" name="instruments">
-              <label for="polygon"><i class="fas fa-star" aria-hidden="true"></i>Многоугольник</label>
+              <input type="radio" alt="Rectangle" id="rect" name="instruments">
+              <label for="rect"><i class="fas fa-square-full" aria-hidden="true"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rectangle</font></font></label>
+              <input type="radio" alt="Ellipse" id="ellipse" name="instruments">
+              <label for="ellipse"><i class="fa fa-circle" aria-hidden="true"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ellipse</font></font></label>
+              <input type="radio" alt="Polygon" id="polygon" name="instruments">
+              <label for="polygon"><i class="fas fa-star" aria-hidden="true"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Polygon</font></font></label>
             </ul>
           </li>
         </ul>
-        <input type="radio" alt="Кисть" id="brush" name="instruments"/>
+        <input type="radio" alt="Brush" id="brush" name="instruments">
         <label for="brush"><i class="fa fa-paint-brush" aria-hidden="true"></i></label>
-        <input type="radio" alt="Ластик" id="eraser" name="instruments"/>
+        <input type="radio" alt="Eraser" id="eraser" name="instruments">
         <label for="eraser"><i class="fa fa-eraser" aria-hidden="true"></i></label>
-        <input type="radio" alt="Пипетка" id="pipette" name="instruments"/>
+        <input type="radio" alt="Pipette" id="pipette" name="instruments">
         <label for="pipette"><i class="fa fa-thermometer-empty" aria-hidden="true" style="transform: rotate(225deg);"></i></label>
-        <input type="radio" alt="Лупа" id="zoom" name="instruments"/>
+        <input type="radio" alt="magnifying glass" id="zoom" name="instruments">
         <label for="zoom"><i class="fa fa-search" aria-hidden="true"></i></label>
-        <button id="button-color" class="button"><i id="color" class="fa fa-square" aria-hidden="true"></i></button>
+        <button id="button-color" class="button"><i id="color" class="fa fa-square" aria-hidden="true" style="color: rgb(0, 0, 0);"></i></button>
         <div id="color-picker" class="cp-default">
                 <div class="picker-wrapper">
-                    <div id="picker" class="picker"></div>
-                    <div id="picker-indicator" class="picker-indicator"></div>
+                    <div id="picker" class="picker" style="background-color: rgb(255, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%"><defs><linearGradient id="gradient-black" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#000000" stop-opacity="1"></stop><stop offset="100%" stop-color="#CC9A81" stop-opacity="0"></stop></linearGradient><linearGradient id="gradient-white" x1="0%" y1="100%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFFFFF" stop-opacity="1"></stop><stop offset="100%" stop-color="#CC9A81" stop-opacity="0"></stop></linearGradient></defs><rect x="0" y="0" width="100%" height="100%" fill="url(#gradient-white)"></rect><rect x="0" y="0" width="100%" height="100%" fill="url(#gradient-black)"></rect></svg></div>
+                    <div id="picker-indicator" class="picker-indicator" style="left: -3.5px; right: 0px; top: 196.5px;"></div>
                 </div>
                 <div class="pcr-wrapper">
-                    <div id="pcr" class="pcr"></div>
-                    <div id="pcr-indicator" class="pcr-indicator"></div>
+                    <div id="pcr" class="pcr"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%"><defs><linearGradient id="gradient-hsv" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#FF0000" stop-opacity="1"></stop><stop offset="13%" stop-color="#FF00FF" stop-opacity="1"></stop><stop offset="25%" stop-color="#8000FF" stop-opacity="1"></stop><stop offset="38%" stop-color="#0040FF" stop-opacity="1"></stop><stop offset="50%" stop-color="#00FFFF" stop-opacity="1"></stop><stop offset="63%" stop-color="#00FF40" stop-opacity="1"></stop><stop offset="75%" stop-color="#0BED00" stop-opacity="1"></stop><stop offset="88%" stop-color="#FFFF00" stop-opacity="1"></stop><stop offset="100%" stop-color="#FF0000" stop-opacity="1"></stop></linearGradient></defs><rect x="0" y="0" width="100%" height="100%" fill="url(#gradient-hsv)"></rect></svg></div>
+                    <div id="pcr-indicator" class="pcr-indicator" style="top: -4px;"></div>
                 </div>
                 <ul id="color-values">
-                    <div id="pcr_bg"></div>
-                    <li><label>RGB:</label><span id="rgb"></span></li>
-                    <li><label>HSV:</label><span id="hsv"></span></li>
-                    <li><label>HEX:</label><span id="hex"></span></li>
+                    <div id="pcr_bg" style="background-color: rgb(0, 0, 0);"></div>
+                    <li><label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">RGB: </font></font></label><span id="rgb"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">rgb(0,0,0)</font></font></span></li>
+                    <li><label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HSV: </font></font></label><span id="hsv"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">hsv(0,0.00,0.00)</font></font></span></li>
+                    <li><label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">HEX: </font></font></label><span id="hex"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">#000000</font></font></span></li>
                 </ul>
             </div>
       </div>
       <div id="back-panel">
         <div id="draw-panel">
-          <svg id="svg-panel" width="900" height="500"
-            xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
-          </svg>
+          <svg id="svg-panel" width="900" height="500" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+          <rect fill="#000000" stroke="#000000" stroke-width="1" stroke-opacity="1" fill-opacity="1" x="12" y="22" rx="0" ry="0" width="150" height="470.5"></rect><circle fill="#FFFFFF" stroke="#000000" stroke-width="1" stroke-opacity="1" fill-opacity="1" r="3" cx="12" cy="22"></circle><circle fill="#FFFFFF" stroke="#000000" stroke-width="1" stroke-opacity="1" fill-opacity="1" r="3" cx="87" cy="22"></circle><circle fill="#FFFFFF" stroke="#000000" stroke-width="1" stroke-opacity="1" fill-opacity="1" r="3" cx="162" cy="22"></circle><circle fill="#FFFFFF" stroke="#000000" stroke-width="1" stroke-opacity="1" fill-opacity="1" r="3" cx="162" cy="257.25"></circle><circle fill="#FFFFFF" stroke="#000000" stroke-width="1" stroke-opacity="1" fill-opacity="1" r="3" cx="162" cy="492.5"></circle><circle fill="#FFFFFF" stroke="#000000" stroke-width="1" stroke-opacity="1" fill-opacity="1" r="3" cx="87" cy="492.5"></circle><circle fill="#FFFFFF" stroke="#000000" stroke-width="1" stroke-opacity="1" fill-opacity="1" r="3" cx="12" cy="492.5"></circle><circle fill="#FFFFFF" stroke="#000000" stroke-width="1" stroke-opacity="1" fill-opacity="1" r="3" cx="12" cy="257.25"></circle><circle fill="#FFFFFF" stroke="#000000" stroke-width="1" stroke-opacity="1" fill-opacity="1" r="12" cx="87" cy="257.25"></circle></svg>
         </div>
       </div>
     </main>
@@ -329,5 +327,4 @@
         });
         cp.setHex(paletteColor);
     </script>
-  </body>
-</html>
+</body></html>
