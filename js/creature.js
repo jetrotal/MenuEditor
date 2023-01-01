@@ -17,11 +17,11 @@ function deleteAllChildren( node ) {
 
 function createSVGPanel() {
 	var
-	  width = prompt('Введите ширину нового поля', 900),
-	  height = prompt('Введите высоту нового поля', 500);
+	  width = prompt("New File's Width:", 900),
+	  height = prompt("New File's Height:", 500);
 
 	if (width < 1 || height < 1){
-		alert("Пожалуйста, введите корректные данные!")
+		alert("Invalid SVG Size!")
 		return;
 	}
 
