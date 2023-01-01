@@ -1,266 +1,264 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
+<html lang="en" dir="ltr">
+  <head>
     <meta charset="utf-8">
     <title>svgEditor - online vector editor</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
-
 <body>
     <header>
-        <p id="logo"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i><b>svgEditor</b></p>
-        <div class="top-buttons-group">
-            <button id="creature" class="button" onclick="createSVGPanel()">
+      <p id="logo"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i><b>svgEditor</b></p>
+      <div class="top-buttons-group">
+        <button id="creature" class="button" onclick="createSVGPanel()">
           <i class="fa fa-plus-square" aria-hidden="true"></i>
         </button>
-            <button class="button" onclick="document.getElementById('file-input').click();">
+        <button class="button" onclick="document.getElementById('file-input').click();">
             <input id="file-input" accept="image/svg+xml" type="file" name="name" style="display: none;" />
             <i class="fa fa-folder" aria-hidden="true"></i>
         </button>
-            <button id="save" class="button" onclick="saveSVG()">
+        <button id="save" class="button" onclick="saveSVG()">
           <i class="fa fa-download" aria-hidden="true"></i>
         </button>
-        </div>
-        <div id="selected-instrument-block">
-            <b id="selected-instrument-label">Selected tool:</b>
-            <b id="selected-instrument">Cursor</b>
-        </div>
-        <div id="options">
-            <div id="options-line">
-                <div class="selector">
-                    <span class="selector-label">Line thickness, px:</span>
-                    <input style="width: 35px;" type="text" class="selector-field">
-                    <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
-                    <ul class="selector-ul">
-                        <li class="selector-li">1</li>
-                        <li class="selector-li">2</li>
-                        <li class="selector-li">3</li>
-                        <li class="selector-li">4</li>
-                        <li class="selector-li">5</li>
-                        <li class="selector-li">7</li>
-                        <li class="selector-li">10</li>
-                        <li class="selector-li">13</li>
-                        <li class="selector-li">15</li>
-                    </ul>
-                </div>
-                <div class="selector">
-                    <span class="selector-label">Length, px:</span>
-                    <input style="width: 35px;" type="text" class="selector-field">
-                    <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
-                    <ul class="selector-ul">
-                        <li class="selector-li">10</li>
-                        <li class="selector-li">50</li>
-                        <li class="selector-li">100</li>
-                    </ul>
-                </div>
-            </div>
-            <div id="options-text">
-                <div class="selector">
-                    <span class="selector-label">Font:</span>
-                    <input style="width: 70px;" type="text" class="selector-field">
-                    <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
-                    <ul class="selector-ul">
-                        <li class="selector-li">Arial</li>
-                        <li class="selector-li">Sans Serif</li>
-                        <li class="selector-li">Open Sans</li>
-                        <li class="selector-li">Roboto</li>
-                    </ul>
-                </div>
-                <div class="selector">
-                    <span class="selector-label">Font size, pt:</span>
-                    <input style="width: 35px;" type="text" class="selector-field" >
-                    <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
-                    <ul class="selector-ul">
-                        <li class="selector-li">7</li>
-                        <li class="selector-li">10</li>
-                        <li class="selector-li">12</li>
-                        <li class="selector-li">14</li>
-                        <li class="selector-li">18</li>
-                        <li class="selector-li">22</li>
-                        <li class="selector-li">36</li>
-                    </ul>
-                </div>
-            </div>
-            <div id="options-rect">
-                <div class="selector">
-                    <span class="selector-label">Rounding radius, px:</span>
-                    <input style="width: 35px;" type="text" class="selector-field">
-                    <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
-                    <ul class="selector-ul">
-                        <li class="selector-li">0</li>
-                        <li class="selector-li">5</li>
-                        <li class="selector-li">7</li>
-                        <li class="selector-li">10</li>
-                        <li class="selector-li">13</li>
-                        <li class="selector-li">15</li>
-                    </ul>
-                </div>
-                <div class="selector">
-                    <span class="selector-label">Height, px:</span>
-                    <input style="width: 35px;" type="text" class="selector-field">
-                    <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
-                    <ul class="selector-ul">
-                        <li class="selector-li">10</li>
-                        <li class="selector-li">50</li>
-                        <li class="selector-li">100</li>
-                    </ul>
-                </div>
-                <div class="selector">
-                    <span class="selector-label">Width, px:</span>
-                    <input style="width: 35px;" type="text" class="selector-field">
-                    <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
-                    <ul class="selector-ul">
-                        <li class="selector-li">10</li>
-                        <li class="selector-li">50</li>
-                        <li class="selector-li">100</li>
-                    </ul>
-                </div>
-            </div>
-            <div id="options-ellipse">
-                <div class="selector">
-                    <span class="selector-label">Height, px:</span>
-                    <input style="width: 35px;" type="text" class="selector-field">
-                    <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
-                    <ul class="selector-ul">
-                        <li class="selector-li">10</li>
-                        <li class="selector-li">50</li>
-                        <li class="selector-li">100</li>
-                    </ul>
-                </div>
-                <div class="selector">
-                    <span class="selector-label">Width, px:</span>
-                    <input style="width: 35px;" type="text" class="selector-field">
-                    <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
-                    <ul class="selector-ul">
-                        <li class="selector-li">10</li>
-                        <li class="selector-li">50</li>
-                        <li class="selector-li">100</li>
-                    </ul>
-                </div>
-            </div>
-            <div id="options-polygon">
-                <div class="selector">
-                    <span class="selector-label">Number of corners:</span>
-                    <input style="width: 35px;" type="text" class="selector-field">
-                    <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
-                    <ul class="selector-ul">
-                        <li class="selector-li">3</li>
-                        <li class="selector-li">4</li>
-                        <li class="selector-li">6</li>
-                        <li class="selector-li">8</li>
-                        <li class="selector-li">10</li>
-                        <li class="selector-li">12</li>
-                        <li class="selector-li">14</li>
-                    </ul>
-                </div>
-                <div class="selector">
-                    <span class="selector-label">Radius:</span>
-                    <input style="width: 35px;" type="text" class="selector-field">
-                    <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
-                    <ul class="selector-ul">
-                        <li class="selector-li">30</li>
-                        <li class="selector-li">40</li>
-                        <li class="selector-li">60</li>
-                        <li class="selector-li">80</li>
-                        <li class="selector-li">100</li>
-                    </ul>
-                </div>
-            </div>
-            <div id="options-brush">
-                <div class="selector">
-                    <span class="selector-label">Brush size, px:</span>
-                    <input style="width: 35px;" type="text" class="selector-field" id="brush_width">
-                    <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
-                    <ul class="selector-ul">
-                        <li class="selector-li">1</li>
-                        <li class="selector-li">2</li>
-                        <li class="selector-li">3</li>
-                        <li class="selector-li">4</li>
-                        <li class="selector-li">5</li>
-                        <li class="selector-li">7</li>
-                        <li class="selector-li">10</li>
-                        <li class="selector-li">13</li>
-                        <li class="selector-li">15</li>
-                    </ul>
-                </div>
-            </div>
-            <div id="options-eraser">
-                <div class="selector">
-                    <span class="selector-label">Eraser size, px:</span>
-                    <input style="width: 35px;" type="text" class="selector-field" id="eraser_width">
-                    <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
-                    <ul class="selector-ul">
-                        <li class="selector-li">4</li>
-                        <li class="selector-li">5</li>
-                        <li class="selector-li">7</li>
-                        <li class="selector-li">10</li>
-                        <li class="selector-li">13</li>
-                        <li class="selector-li">15</li>
-                    </ul>
-                </div>
-            </div>
-            <div id="options-zoom">
-                <div class="selector">
-                    <span class="selector-label">Scale:</span>
-                    <input style="width: 35px;" type="text" class="selector-field">
-                    <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
-                    <ul class="selector-ul">
-                        <li class="selector-li">0.25</li>
-                        <li class="selector-li">0.5</li>
-                        <li class="selector-li">0.75</li>
-                        <li class="selector-li">1</li>
-                        <li class="selector-li">1.25</li>
-                        <li class="selector-li">1.5</li>
-                        <li class="selector-li">2</li>
-                        <li class="selector-li">3</li>
-                        <li class="selector-li">4</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+      </div>
+      <div id="selected-instrument-block">
+        <b id="selected-instrument-label">Selected tool:</b>
+        <b id="selected-instrument">Cursor</b>
+      </div>
+      <div id="options">
+          <div id="options-line">
+              <div class="selector">
+                  <span class="selector-label">Line thickness, px:</span>
+                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
+                  <ul class="selector-ul">
+                      <li class="selector-li">1</li>
+                      <li class="selector-li">2</li>
+                      <li class="selector-li">3</li>
+                      <li class="selector-li">4</li>
+                      <li class="selector-li">5</li>
+                      <li class="selector-li">7</li>
+                      <li class="selector-li">10</li>
+                      <li class="selector-li">13</li>
+                      <li class="selector-li">15</li>
+                  </ul>
+              </div>
+              <div class="selector">
+                  <span class="selector-label">Length, px:</span>
+                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
+                  <ul class="selector-ul">
+                      <li class="selector-li">10</li>
+                      <li class="selector-li">50</li>
+                      <li class="selector-li">100</li>
+                  </ul>
+              </div>
+          </div>
+          <div id="options-text">
+              <div class="selector">
+                  <span class="selector-label">Font:</span>
+                  <input style="width: 70px;" type="text" class="selector-field" />
+                  <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
+                  <ul class="selector-ul">
+                      <li class="selector-li">Arial</li>
+                      <li class="selector-li">Sans Serif</li>
+                      <li class="selector-li">Open Sans</li>
+                      <li class="selector-li">Roboto</li>
+                  </ul>
+              </div>
+              <div class="selector">
+                  <span class="selector-label">Font size, pt:</span>
+                  <input style="width: 35px;" type="text" class="selector-field" >
+                  <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
+                  <ul class="selector-ul">
+                      <li class="selector-li">7</li>
+                      <li class="selector-li">10</li>
+                      <li class="selector-li">12</li>
+                      <li class="selector-li">14</li>
+                      <li class="selector-li">18</li>
+                      <li class="selector-li">22</li>
+                      <li class="selector-li">36</li>
+                  </ul>
+              </div>
+          </div>
+          <div id="options-rect">
+              <div class="selector">
+                  <span class="selector-label">Rounding radius, px:</span>
+                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
+                  <ul class="selector-ul">
+                      <li class="selector-li">0</li>
+                      <li class="selector-li">5</li>
+                      <li class="selector-li">7</li>
+                      <li class="selector-li">10</li>
+                      <li class="selector-li">13</li>
+                      <li class="selector-li">15</li>
+                  </ul>
+              </div>
+              <div class="selector">
+                  <span class="selector-label">Height, px:</span>
+                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
+                  <ul class="selector-ul">
+                      <li class="selector-li">10</li>
+                      <li class="selector-li">50</li>
+                      <li class="selector-li">100</li>
+                  </ul>
+              </div>
+              <div class="selector">
+                  <span class="selector-label">Width, px:</span>
+                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
+                  <ul class="selector-ul">
+                      <li class="selector-li">10</li>
+                      <li class="selector-li">50</li>
+                      <li class="selector-li">100</li>
+                  </ul>
+              </div>
+          </div>
+          <div id="options-ellipse">
+              <div class="selector">
+                  <span class="selector-label">Height, px:</span>
+                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
+                  <ul class="selector-ul">
+                      <li class="selector-li">10</li>
+                      <li class="selector-li">50</li>
+                      <li class="selector-li">100</li>
+                  </ul>
+              </div>
+              <div class="selector">
+                  <span class="selector-label">Width, px:</span>
+                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
+                  <ul class="selector-ul">
+                      <li class="selector-li">10</li>
+                      <li class="selector-li">50</li>
+                      <li class="selector-li">100</li>
+                  </ul>
+              </div>
+          </div>
+          <div id="options-polygon">
+              <div class="selector">
+                  <span class="selector-label">Number of corners:</span>
+                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
+                  <ul class="selector-ul">
+                      <li class="selector-li">3</li>
+                      <li class="selector-li">4</li>
+                      <li class="selector-li">6</li>
+                      <li class="selector-li">8</li>
+                      <li class="selector-li">10</li>
+                      <li class="selector-li">12</li>
+                      <li class="selector-li">14</li>
+                  </ul>
+              </div>
+              <div class="selector">
+                  <span class="selector-label">Radius:</span>
+                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
+                  <ul class="selector-ul">
+                      <li class="selector-li">30</li>
+                      <li class="selector-li">40</li>
+                      <li class="selector-li">60</li>
+                      <li class="selector-li">80</li>
+                      <li class="selector-li">100</li>
+                  </ul>
+              </div>
+          </div>
+          <div id="options-brush">
+              <div class="selector">
+                  <span class="selector-label">Brush size, px:</span>
+                  <input style="width: 35px;" type="text" class="selector-field" id="brush_width"/>
+                  <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
+                  <ul class="selector-ul">
+                      <li class="selector-li">1</li>
+                      <li class="selector-li">2</li>
+                      <li class="selector-li">3</li>
+                      <li class="selector-li">4</li>
+                      <li class="selector-li">5</li>
+                      <li class="selector-li">7</li>
+                      <li class="selector-li">10</li>
+                      <li class="selector-li">13</li>
+                      <li class="selector-li">15</li>
+                  </ul>
+              </div>
+          </div>
+          <div id="options-eraser">
+              <div class="selector">
+                  <span class="selector-label">Eraser size, px:</span>
+                  <input style="width: 35px;" type="text" class="selector-field" id="eraser_width">
+                  <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
+                  <ul class="selector-ul">
+                      <li class="selector-li">4</li>
+                      <li class="selector-li">5</li>
+                      <li class="selector-li">7</li>
+                      <li class="selector-li">10</li>
+                      <li class="selector-li">13</li>
+                      <li class="selector-li">15</li>
+                  </ul>
+              </div>
+          </div>
+          <div id="options-zoom">
+              <div class="selector">
+                  <span class="selector-label">Scale:</span>
+                  <input style="width: 35px;" type="text" class="selector-field" />
+                  <button type="button" class="selector-button"><i style="color: white;" class="fas fa-sort-down"></i></button>
+                  <ul class="selector-ul">
+                      <li class="selector-li">0.25</li>
+                      <li class="selector-li">0.5</li>
+                      <li class="selector-li">0.75</li>
+                      <li class="selector-li">1</li>
+                      <li class="selector-li">1.25</li>
+                      <li class="selector-li">1.5</li>
+                      <li class="selector-li">2</li>
+                      <li class="selector-li">3</li>
+                      <li class="selector-li">4</li>
+                  </ul>
+              </div>
+          </div>
+      </div>
     </header>
     <main>
-        <div id="left-panel">
-            <input type="radio" alt="Selector Tool" id="cursor" name="instruments" checked="">
-            <label for="cursor"><i class="fa fa-mouse-pointer"></i></label>
-            <input type="radio" alt="Hand Tool" id="hand" name="instruments">
-            <label for="hand"><i class="fa fa-hand-paper" aria-hidden="true"></i></label>
-            <input type="radio" alt="Pen Tool" id="pen" name="instruments">
-            <label for="pen"><i class="fas fa-pen-fancy" aria-hidden="true"></i></label>
-            <input type="radio" alt="Text Tool" id="text" name="instruments">
-            <label for="text"><i class="fa fa-font" aria-hidden="true"></i></label>
-            <input type="radio" alt="Line Tool" id="line" name="instruments">
-            <label for="line"><i class="fa fa-minus fa-lg" aria-hidden="true" style="transform: rotate(-45deg);"></i></label>
-            <ul>
-                <li>
-                    <button class="button">
+      <div id="left-panel">
+        <input type="radio" alt="Selector Tool" id="cursor" name="instruments" checked/>
+        <label for="cursor"><i class="fa fa-mouse-pointer"></i></label>
+        <input type="radio" alt="Hand Tool" id="hand" name="instruments"/>
+        <label for="hand"><i class="fa fa-hand-paper" aria-hidden="true"></i></label>
+        <input type="radio" alt="Pen Tool" id="pen" name="instruments"/>
+        <label for="pen"><i class="fas fa-pen-fancy" aria-hidden="true"></i></label>
+        <input type="radio" alt="Text Tool" id="text" name="instruments"/>
+        <label for="text"><i class="fa fa-font" aria-hidden="true"></i></label>
+        <input type="radio" alt="Line Tool" id="line" name="instruments"/>
+        <label for="line"><i class="fa fa-minus fa-lg" aria-hidden="true" style="transform: rotate(-45deg);"></i></label>
+        <ul>
+          <li>
+           <button class="button">
               <i class="fa fa-caret-up fa-lg" aria-hidden="true" style="transform: scale(1.2, 1.2); display:block;"></i>
               <i class="fa fa-circle" aria-hidden="true" style="transform: scale(0.7, 0.7);"></i>
               <i class="fa fa-square" aria-hidden="true" style="transform: scale(0.7, 0.7);"></i>
             </button>
-                    <ul class="vertical-menu">
-                        <input type="radio" alt="Rectangle Tool" id="rect" name="instruments">
-                        <label for="rect"><i class="fas fa-square-full" aria-hidden="true"></i>Rectangle</label>
-                        <input type="radio" alt="Ellipse Tool" id="ellipse" name="instruments">
-                        <label for="ellipse"><i class="fa fa-circle" aria-hidden="true"></i>Ellipse</label>
-                        <input type="radio" alt="Polygon Tool" id="polygon" name="instruments">
-                        <label for="polygon"><i class="fas fa-star" aria-hidden="true"></i>Polygon</label>
-                    </ul>
-                </li>
+            <ul class="vertical-menu">
+              <input type="radio" alt="Rectangle Tool" id="rect" name="instruments">
+              <label for="rect"><i class="fas fa-square-full" aria-hidden="true"></i>Rectangle</label>
+              <input type="radio" alt="Ellipse Tool" id="ellipse" name="instruments">
+              <label for="ellipse"><i class="fa fa-circle" aria-hidden="true"></i>Ellipse</label>
+              <input type="radio" alt="Polygon Tool" id="polygon" name="instruments">
+              <label for="polygon"><i class="fas fa-star" aria-hidden="true"></i>Polygon</label>
             </ul>
-            <input type="radio" alt="Brush Tool" id="brush" name="instruments">
-            <label for="brush"><i class="fa fa-paint-brush" aria-hidden="true"></i></label>
-            <input type="radio" alt="Eraser Tool" id="eraser" name="instruments">
-            <label for="eraser"><i class="fa fa-eraser" aria-hidden="true"></i></label>
-            <input type="radio" alt="Color Picker Tool" id="pipette" name="instruments">
-            <label for="pipette"><i class="fa fa-thermometer-empty" aria-hidden="true" style="transform: rotate(225deg);"></i></label>
-            <input type="radio" alt="Zoom Tool" id="zoom" name="instruments">
-            <label for="zoom"><i class="fa fa-search" aria-hidden="true"></i></label>
-            <button id="button-color" class="button"><i id="color" class="fa fa-square" aria-hidden="true"></i></button>
-            <div id="color-picker" class="cp-default">
+          </li>
+        </ul>
+        <input type="radio" alt="Brush Tool" id="brush" name="instruments"/>
+        <label for="brush"><i class="fa fa-paint-brush" aria-hidden="true"></i></label>
+        <input type="radio" alt="Eraser Tool" id="eraser" name="instruments"/>
+        <label for="eraser"><i class="fa fa-eraser" aria-hidden="true"></i></label>
+        <input type="radio" alt="Color Picker Tool" id="pipette" name="instruments"/>
+        <label for="pipette"><i class="fa fa-thermometer-empty" aria-hidden="true" style="transform: rotate(225deg);"></i></label>
+        <input type="radio" alt="Zoom Tool" id="zoom" name="instruments"/>
+        <label for="zoom"><i class="fa fa-search" aria-hidden="true"></i></label>
+        <button id="button-color" class="button"><i id="color" class="fa fa-square" aria-hidden="true"></i></button>
+        <div id="color-picker" class="cp-default">
                 <div class="picker-wrapper">
                     <div id="picker" class="picker"></div>
                     <div id="picker-indicator" class="picker-indicator"></div>
@@ -276,13 +274,14 @@
                     <li><label>HEX:</label><span id="hex"></span></li>
                 </ul>
             </div>
-        </div>
-        <div id="back-panel">
-            <div id="draw-panel">
-                <svg id="svg-panel" width="900" height="500" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+      </div>
+      <div id="back-panel">
+        <div id="draw-panel">
+          <svg id="svg-panel" width="900" height="500"
+            xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
           </svg>
-            </div>
         </div>
+      </div>
     </main>
     <!--Добавлять скрипты под этим комментарием-->
     <script src="js/selector-ui.js"></script>
@@ -324,12 +323,11 @@
         colorPicker.addEventListener('click', () => {
             if (currentFigure !== null && !(currentFigure instanceof BrushBox) && !(currentFigure instanceof Line)) {
                 currentFigure.svgFig.setAttribute('fill', paletteColor);
-            } else if (currentFigure !== null && ((currentFigure instanceof BrushBox) || (currentFigure instanceof Line))) {
+            }else if (currentFigure !== null && ((currentFigure instanceof BrushBox) || (currentFigure instanceof Line))) {
                 currentFigure.svgFig.setAttribute('stroke', paletteColor);
             }
         });
         cp.setHex(paletteColor);
     </script>
-</body>
-
+  </body>
 </html>
