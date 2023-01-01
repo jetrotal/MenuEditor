@@ -9,10 +9,8 @@
 'use strict';
 
 class Polygon extends Figure {
-    groupID;
-    constructor(svgFigure, angles, groupID = "0") {
+    constructor(svgFigure, angles) {
         super(svgFigure);
-        this.groupID = groupID;
         this.n = +angles;
         this.r = -1;
         this.center = new PolygonPoint(this, { x: 0, y: 0 }, -1);
@@ -21,7 +19,6 @@ class Polygon extends Figure {
         for (let i = 0; i < this.n; i++) {
             this.svgFig.points.appendItem(RefPoint.createSVGPoint({ x: 0, y: 0 }));
             this.refPoints.push(new PolygonPoint(this, { x: 0, y: 0 }, i));
-
         }
 
         this.updateNumOfVerts = this.updateNumOfVerts.bind(this);
@@ -122,21 +119,6 @@ class Polygon extends Figure {
         } ).bind(this);
 
         const stopMoving = ( (e) => {
-            if(this.groupID != "0"){
-                // вычислим dx и dy фигуры
-                let delta = this.getDeltaAllDotsAboutCenter(this.copy.points, this.svgFig.points);
-                console.log(delta);
-                let figures = svgPanel.getElementById(currentFigure.groupID).childNodes;
-                for(let i = 0; i < figures.length; i++){
-                    if(this.merge(figures[i].points) !== this.merge(this.svgFig.points)){
-                        //move on delta
-                        for (let j = 0; j < figures[i].points.length; j++) {
-                            figures[i].points[j].x +=delta[j].x;
-                            figures[i].points[j].y +=delta[j].y;
-                        }
-                    }
-                }
-            }
             this.deleteTmpCopy();
             this.somePointTaken = someFigureTaken = false;
             this.refPoints[ind].circle.setAttribute('fill', '#FFFFFF');
@@ -168,18 +150,8 @@ class Polygon extends Figure {
         document.addEventListener("keydown", this.updateNumOfVerts);
         this.refPoints[ind].circle.removeEventListener('mousedown', this.takePoint);
         drawPanel.addEventListener('mouseup', stopMoving);
+    }
 
-    }
-    merge(points) {
-        let result = "";
-        for (let i = 0; i < points.length; i++) {
-            result+=this.roundToThree(points[i].x)+" "+this.roundToThree(points[i].y);
-        }
-        return result;
-    }
-    roundToThree(num) {
-        return +(Math.round(num + "e+3")  + "e-3");
-    }
     movePolygon(event) {
         if (!cursor.checked || this.somePointTaken || someFigureTaken) {
             return;
@@ -196,23 +168,7 @@ class Polygon extends Figure {
             this.center.y = coords.y;
         };
 
-
         const stopMoving = (e) => {
-            if(this.groupID != "0"){
-                // вычислим dx и dy фигуры
-                let delta = this.getDeltaAllDots(this.copy.points, this.svgFig.points);
-                let figures = svgPanel.getElementById(currentFigure.groupID).childNodes;
-                for(let i = 0; i < figures.length; i++){
-                    if(this.merge(figures[i].points) !== this.merge(this.svgFig.points)){
-                        //move on delta
-                        for (let j = 0; j < figures[i].points.length; j++) {
-                            figures[i].points[j].x +=delta[i].x;
-                            figures[i].points[j].y +=delta[i].y;
-                        }
-                    }
-                }
-            }
-
             this.deleteTmpCopy();
             this.somePointTaken = someFigureTaken = false;
             this.center.circle.setAttribute('fill', '#FFFFFF');
@@ -236,7 +192,6 @@ class Polygon extends Figure {
         document.addEventListener('mousemove', move);
         document.addEventListener('keydown', returnToOld);
         drawPanel.addEventListener('mouseup', stopMoving);
-
     }
 
     moveFixedOnBottom(r, ind) {
@@ -326,14 +281,7 @@ class Polygon extends Figure {
     createTmpCopy() {
         this.copy = createSVGElem('polygon', 'none', '#000000', '1', '0.5', '0.5');
         this.copy.setAttribute('points', this.svgFig.getAttribute('points'));
-        if(this.groupID == "0"){
-            svgPanel.insertBefore(this.copy, this.svgFig.nextSibling);
-        }
-        else{
-            let g = document.getElementById(this.groupID);
-            svgPanel.insertBefore(this.copy, g);
-        }
-
+        svgPanel.insertBefore(this.copy, this.svgFig.nextSibling);
     }
 
     showOptions() {
@@ -342,39 +290,6 @@ class Polygon extends Figure {
         const options = optionsPolygon.getElementsByTagName('input');
         options[0].value = this.n;
         options[1].value = this.r;
-    }
-
-    getDeltaAllDots(points1, points2) {
-        let result = [];
-        for (let i = 0; i < points1.length; i++) {
-            result.push({x:points2[i].x-points1[i].x, y:points2[i].y-points1[i].y});
-        }
-        return result;
-    }
-
-    getDeltaAllDotsAboutCenter(points1, points2) {
-        let center1 = this.get_polygon_centroid(points1);
-        let center2 = this.get_polygon_centroid(points2);
-        let result = [];
-        for (let i = 0; i < points1.length; i++) {
-            let deltaFromCenter1 = {x:(points1[i].x-center1.x), y:(points1[i].y-center1.y)};
-            let deltaFromCenter2 = {x:(points2[i].x-center2.x), y:(points2[i].y-center2.y)};
-
-            result.push({x:deltaFromCenter2.x - deltaFromCenter1.x, y:deltaFromCenter2.y - deltaFromCenter1.y,})
-            //result.push({x:points2[i].x-points1[i].x, y:points2[i].y-points1[i].y});
-        }
-        return result;
-    }
-    get_polygon_centroid(points) {
-        var centroid = {x: 0, y: 0};
-        for(var i = 0; i < points.length; i++) {
-            var point = points[i];
-            centroid.x += point.x;
-            centroid.y += point.y;
-        }
-        centroid.x /= points.length;
-        centroid.y /= points.length;
-        return centroid;
     }
 }
 

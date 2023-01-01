@@ -24,9 +24,7 @@
       </div>
       <div id="selected-instrument-block">
         <b id="selected-instrument-label">Выбранный инструмент:</b>
-        <b id="selected-instrument">Курсор </b>
-          <b id="selected-counter-label">Выбранных элементов:</b>
-          <div id='select-counter'>0</div>
+        <b id="selected-instrument">Курсор</b>
       </div>
       <div id="options">
           <div id="options-line">
@@ -228,38 +226,55 @@
         <label for="cursor"><i class="fa fa-mouse-pointer"></i></label>
         <input type="radio" alt="Рука" id="hand" name="instruments"/>
         <label for="hand"><i class="fa fa-hand-paper" aria-hidden="true"></i></label>
-
-        <input type="radio" alt="Многоугольник" id="polygon" name="instruments">
-        <label for="polygon"><i class="fas fa-star" aria-hidden="true"></i></label>
-
+        <input type="radio" alt="Перо" id="pen" name="instruments"/>
+        <label for="pen"><i class="fas fa-pen-fancy" aria-hidden="true"></i></label>
+        <input type="radio" alt="Текст" id="text" name="instruments"/>
+        <label for="text"><i class="fa fa-font" aria-hidden="true"></i></label>
+        <input type="radio" alt="Прямая" id="line" name="instruments"/>
+        <label for="line"><i class="fa fa-minus fa-lg" aria-hidden="true" style="transform: rotate(-45deg);"></i></label>
+        <ul>
+          <li>
+            <button class="button">
+              <i class="fa fa-caret-up fa-lg" aria-hidden="true" style="transform: scale(1.2, 1.2); display:block;"></i>
+              <i class="fa fa-circle" aria-hidden="true" style="transform: scale(0.7, 0.7);"></i>
+              <i class="fa fa-square" aria-hidden="true" style="transform: scale(0.7, 0.7);"></i>
+            </button>
+            <ul class="vertical-menu">
+              <input type="radio" alt="Прямоугольник" id="rect" name="instruments">
+              <label for="rect"><i class="fas fa-square-full" aria-hidden="true"></i>Прямоугольник</label>
+              <input type="radio" alt="Эллипс" id="ellipse" name="instruments">
+              <label for="ellipse"><i class="fa fa-circle" aria-hidden="true"></i>Эллипс</label>
+              <input type="radio" alt="Многоугольник" id="polygon" name="instruments">
+              <label for="polygon"><i class="fas fa-star" aria-hidden="true"></i>Многоугольник</label>
+            </ul>
+          </li>
+        </ul>
+        <input type="radio" alt="Кисть" id="brush" name="instruments"/>
+        <label for="brush"><i class="fa fa-paint-brush" aria-hidden="true"></i></label>
+        <input type="radio" alt="Ластик" id="eraser" name="instruments"/>
+        <label for="eraser"><i class="fa fa-eraser" aria-hidden="true"></i></label>
+        <input type="radio" alt="Пипетка" id="pipette" name="instruments"/>
+        <label for="pipette"><i class="fa fa-thermometer-empty" aria-hidden="true" style="transform: rotate(225deg);"></i></label>
+        <input type="radio" alt="Лупа" id="zoom" name="instruments"/>
+        <label for="zoom"><i class="fa fa-search" aria-hidden="true"></i></label>
         <button id="button-color" class="button"><i id="color" class="fa fa-square" aria-hidden="true"></i></button>
-
-          <table>
-              <row>
-
-                  <td hidden = "true"><button id="create-group" class="button" >
-                      <i class="fa fa-plus-square" aria-hidden="true"></i>G
-                  </button></td>
-              </row>
-          </table>
-          <div id="color-picker" class="cp-default">
-              <div class="picker-wrapper">
-                  <div id="picker" class="picker"></div>
-                  <div id="picker-indicator" class="picker-indicator"></div>
-              </div>
-              <div class="pcr-wrapper">
-                  <div id="pcr" class="pcr"></div>
-                  <div id="pcr-indicator" class="pcr-indicator"></div>
-              </div>
-              <ul id="color-values">
-                  <div id="pcr_bg"></div>
-                  <li><label>RGB:</label><span id="rgb"></span></li>
-                  <li><label>HSV:</label><span id="hsv"></span></li>
-                  <li><label>HEX:</label><span id="hex"></span></li>
-              </ul>
-          </div>
+        <div id="color-picker" class="cp-default">
+                <div class="picker-wrapper">
+                    <div id="picker" class="picker"></div>
+                    <div id="picker-indicator" class="picker-indicator"></div>
+                </div>
+                <div class="pcr-wrapper">
+                    <div id="pcr" class="pcr"></div>
+                    <div id="pcr-indicator" class="pcr-indicator"></div>
+                </div>
+                <ul id="color-values">
+                    <div id="pcr_bg"></div>
+                    <li><label>RGB:</label><span id="rgb"></span></li>
+                    <li><label>HSV:</label><span id="hsv"></span></li>
+                    <li><label>HEX:</label><span id="hex"></span></li>
+                </ul>
+            </div>
       </div>
-
       <div id="back-panel">
         <div id="draw-panel">
           <svg id="svg-panel" width="900" height="500"
@@ -274,10 +289,18 @@
     <script src="js/handler.js"></script>
     <script src="js/hand.js"></script>
     <script src="js/Figure.js"></script>
+    <script src="js/polyline.js"></script>
+    <script src="js/rectangle.js"></script>
+    <script src="js/ellipse.js"></script>
     <script src="js/polygon.js"></script>
+    <script src="js/brush.js"></script>
+    <script src="js/eraser.js"></script>
+    <script src="js/text.js"></script>
+    <script src="js/line.js"></script>
     <script src="js/open.js"></script>
     <script src="js/save.js"></script>
     <script src="js/creature.js"></script>
+    <script src="js/pipette.js"></script>
     <script src="js/keyActions.js"></script>
     <script src="js/colorpicker.js"></script>
     <script type="text/javascript">
@@ -298,56 +321,13 @@
                 document.getElementById('color').style.color = hex;
             });
         colorPicker.addEventListener('click', () => {
-            if (currentFigure !== null) {
-                if(currentFigure.groupID == "0") {
-                    currentFigure.svgFig.setAttribute('fill', paletteColor);
-                } else {
-
-                    let figures = svgPanel.getElementById(currentFigure.groupID).childNodes;
-                    for(let i = 0; i < figures.length; i++){
-                        figures[i].setAttribute('fill', paletteColor);
-                    }
-                }
+            if (currentFigure !== null && !(currentFigure instanceof BrushBox) && !(currentFigure instanceof Line)) {
+                currentFigure.svgFig.setAttribute('fill', paletteColor);
+            }else if (currentFigure !== null && ((currentFigure instanceof BrushBox) || (currentFigure instanceof Line))) {
+                currentFigure.svgFig.setAttribute('stroke', paletteColor);
             }
         });
         cp.setHex(paletteColor);
-
-        document.getElementById("create-group").addEventListener('click', ()=>{
-            // отменить группировку, если хоть один элемент уже сгруппирован
-            for(let i = 0; i < selectedFigures.length; i++){
-                if (selectedFigures[i].groupID !== "0"){
-                    alert("Группировка невозможна, один из выбранных элементов относится к той или иной группе");
-                    return;
-                }
-            }
-            // группировка элементов
-            let groups = document.getElementsByTagName("g");
-            let groupID = selectedFigures[0].groupID;
-            for(let i = 0; i < groups.length; i++) {
-                if(groupID < groups[i].getAttribute("id")){
-                    groupID = groups[i].getAttribute("id");
-                }
-            }
-            groupID++;
-
-
-            let group = document.createElementNS(svgNS, "g");
-            group.setAttribute("id", groupID);
-            for(let i = 0; i < selectedFigures.length; i++){
-                selectedFigures[i].groupID = groupID;
-
-                //selectedFigures[i].hideRefPoints();
-                svgPanel.removeChild(selectedFigures[i].svgFig);
-                group.appendChild(selectedFigures[i].svgFig);
-                //selectedFigures[i].hideOrShow();
-            }
-            selectedFigures = [];
-            Figure.refreshSelectedFiguresCounter();
-            //svgPanel.insertBefore(group, svgPanel);
-            svgPanel.appendChild(group);
-
-        });
-
     </script>
   </body>
 </html>
