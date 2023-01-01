@@ -44,7 +44,7 @@ class Rectangle extends Figure {
         let click = getMouseCoords(event);
         let moving = false;
         const options = optionsRect.getElementsByTagName('input');
-        const rectangle = new Rectangle(createSVGElem('rect', undefined, '#000000', 0));
+        const rectangle = new Rectangle(createSVGElem('foreignObject', undefined, '#000000', 0));
         ({ x: rectangle.x, y: rectangle.y } = click);
         rectangle.r = +options[0].value;
         svgPanel.appendChild(rectangle.svgFig);
