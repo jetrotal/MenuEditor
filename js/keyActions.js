@@ -8,7 +8,12 @@ let constr;
 const copy = () => {
     switch(constr.name) {
         case 'Rectangle':
-            newSvgFig = createSVGElem('rect');
+let el = createSVGElem('foreignObject', undefined, '#000000', 0);
+        el.innerHTML = `<div id="menuBG">
+      <div class="border"></div>
+    </div>`;
+
+            newSvgFig = el
             newSvgFig.setAttribute('x', +(currentFigure.x + 33));
             newSvgFig.setAttribute('y', +(currentFigure.y + 33));
             newSvgFig.setAttribute('width', +currentFigure.width);
