@@ -50,7 +50,6 @@ class Rectangle extends Figure {
     </div>`;
 
         const rectangle = new Rectangle(el);
-        rectangle.svgFig
         ({ x: rectangle.x, y: rectangle.y } = click);
         rectangle.r = +options[0].value;
         svgPanel.appendChild(rectangle.svgFig);
