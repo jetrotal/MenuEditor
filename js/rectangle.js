@@ -74,6 +74,8 @@ class Rectangle extends Figure {
             rectangle.moveByAngeles(click, current);
             options[1].value = rectangle.height;
             options[2].value = rectangle.width;
+            options[3].value = rectangle.x;
+            options[4].value = rectangle.y;
         };
 
         const stopMoving = () => {
@@ -135,6 +137,8 @@ class Rectangle extends Figure {
             }
             options[1].value = this.height;
             options[2].value = this.width;
+            options[3].value = this.x;
+            options[4].value = this.y;
         } ).bind(this);
 
         const stopMoving = (e) => {
@@ -291,6 +295,8 @@ class Rectangle extends Figure {
         options[0].value = this.r;
         options[1].value = this.height;
         options[2].value = this.width;
+        options[3].value = this.x;
+        options[4].value = this.y;
     }
 
     get x() { return +this.svgFig.getAttribute('x'); }
