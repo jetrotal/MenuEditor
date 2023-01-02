@@ -2,7 +2,7 @@
 
 const cursor = document.getElementById('cursor');
 const pen = document.getElementById('pen');
-const rect = document.getElementById('rect');
+const rect = document.getElementById('foreignObject');//rect
 const ellipse = document.getElementById('ellipse');
 const polygon = document.getElementById('polygon');
 
