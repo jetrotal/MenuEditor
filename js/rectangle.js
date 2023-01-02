@@ -1,9 +1,9 @@
 /*
-    Скрипт для создания прямоугольника(простого и округленного).
-    Для построения прямоугольника необходимо кликнуть ЛКМ и затем, не отжимая ее,
-    провести прямоугольник нужного размера. После этого размеры прямоугольника
-    можно изменять перемещая его опорные точки. Если при этом зажать Alt, то
-    изменение размеров будет совершаться симметрично центру описанной окружности.
+    A script for creating a rectangle (simple and rounded).
+    To build a rectangle, click the left mouse button and then, without releasing it,
+    to draw a rectangle of desired size. After that the rectangle dimensions
+    you can change the size of the rectangle by moving its control points. If you hold down the Alt key at that you will change the rectangle dimensions symmetrically.
+    you will change the rectangle dimensions symmetrically to the center of the circumscribed circle.
 */
 'use strict';
 
@@ -11,11 +11,11 @@ class Rectangle extends Figure {
     constructor(svgFigure) {
         super(svgFigure);
 
-        this.center = new RectPoint(this, { x: 0, y: 0});
+        this.center = new RectPoint(this, { x: 0, y: 0 });
         this.center.circle.onmousedown = this.moveRect.bind(this);
 
         for (let i = 0; i < 8; i++) {
-            this.refPoints.push(new RectPoint(this, { x: 0, y: 0}));
+            this.refPoints.push(new RectPoint(this, { x: 0, y: 0 }));
         }
 
         this.getMergeCoords = this.getMergeCoords.bind(this);
@@ -103,7 +103,8 @@ class Rectangle extends Figure {
         const oldAttrs = [this.x, this.y, this.width, this.height];
         const options = optionsRect.getElementsByTagName('input');
         const clicked = getMouseCoords(event);
-        let ind = this.findIndexMerged(clicked), newInd = null;
+        let ind = this.findIndexMerged(clicked),
+            newInd = null;
         if (ind === undefined) {
             return;
         }
@@ -112,7 +113,7 @@ class Rectangle extends Figure {
         let fixed = { x: this.refPoints[symInd].x, y: this.refPoints[symInd].y };
         const [horizontal, angelPushed] = [pushed.y == fixed.y, !(pushed.y == fixed.y || pushed.x == fixed.x)];
 
-        const movePoint = ( (e) => {
+        const movePoint = ((e) => {
             const coords = getMouseCoords(e);
             if (angelPushed) {
                 if (e.altKey) {
@@ -139,7 +140,7 @@ class Rectangle extends Figure {
             options[2].value = this.width;
             options[3].value = this.x;
             options[4].value = this.y;
-        } ).bind(this);
+        }).bind(this);
 
         const stopMoving = (e) => {
             const upped = this.findIndexMerged(getMouseCoords(e), ind);
@@ -155,13 +156,13 @@ class Rectangle extends Figure {
             drawPanel.removeEventListener('mouseup', stopMoving);
         };
 
-        const returnToOld = ( (e) => {
+        const returnToOld = ((e) => {
             if (e.keyCode == 27) {
                 this.setAttrs(oldAttrs);
                 this.updateRefPointsCoords();
                 stopMoving(e);
             }
-        } ).bind(this);
+        }).bind(this);
 
         this.createTmpCopy();
         this.somePointTaken = someFigureTaken = true;
@@ -179,8 +180,8 @@ class Rectangle extends Figure {
 
         const move = (e) => {
             const coords = getMouseCoords(e);
-            this.x = coords.x - this.width/2;
-            this.y = coords.y - this.height/2;
+            this.x = coords.x - this.width / 2;
+            this.y = coords.y - this.height / 2;
             this.updateRefPointsCoords();
         };
 
@@ -211,16 +212,16 @@ class Rectangle extends Figure {
     }
 
     updateRefPointsCoords() {
-        const update = (ind, x, y) => this.refPoints[ind].setCoords({ x: x, y: y});
+        const update = (ind, x, y) => this.refPoints[ind].setCoords({ x: x, y: y });
         const [x, y, width, height] = [this.x, this.y, this.width, this.height];
         update(0, x, y);
-        update(1, x + width/2, y);
+        update(1, x + width / 2, y);
         update(2, x + width, y);
-        update(3, x + width, y + height/2);
+        update(3, x + width, y + height / 2);
         update(4, x + width, y + height);
-        update(5, x + width/2, y + height);
+        update(5, x + width / 2, y + height);
         update(6, x, y + height);
-        update(7, x, y + height/2);
+        update(7, x, y + height / 2);
         this.center.setCoords(this.c);
     }
 
@@ -274,7 +275,7 @@ class Rectangle extends Figure {
     }
 
     getSymmetrical(point) {
-        return { x: 2*this.c.x - point.x, y: 2*this.c.y - point.y };
+        return { x: 2 * this.c.x - point.x, y: 2 * this.c.y - point.y };
     }
 
     createTmpCopy() {
@@ -304,7 +305,7 @@ class Rectangle extends Figure {
     get r() { return +this.svgFig.getAttribute('rx'); }
     get width() { return +this.svgFig.getAttribute('width'); }
     get height() { return +this.svgFig.getAttribute('height'); }
-    get c() { return { x: this.x + this.width/2, y: this.y + this.height/2 }; }
+    get c() { return { x: this.x + this.width / 2, y: this.y + this.height / 2 }; }
 
     set x(v) { this.svgFig.setAttribute('x', +v); }
     set y(v) { this.svgFig.setAttribute('y', +v); }

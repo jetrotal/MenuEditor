@@ -1,3 +1,5 @@
+/*"Script for the tool "Color Picker"*/
+
 (function(h, k, j) {
     function r(a) {
         if (h.event && h.event.contentOverflow !== j) return {

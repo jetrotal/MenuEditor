@@ -1,20 +1,26 @@
 'use strict';
 
-/*Массив инструментов*/
+/*array of tools*/
+
 const instruments = [];
 
-/*ID'шники инструментов*/
+/*ID's of tools*/
+
 const ids = ['cursor', 'hand', 'pen', 'text',
     'line', 'ellipse', 'rect', 'polygon',
-    'brush', 'eraser', 'pipette', 'zoom'];
+    'brush', 'eraser', 'pipette', 'zoom'
+];
 
-/*Текущий выбранный инструмент*/
+/*current selected tool*/
+
 let currentInstrument = null;
 
-/*Текущая выделенная фигура*/
+/*current selected shape*/
+
 let currentFigure = null;
 
-/*Захвачена ли опорная точка некоторой фигуры*/
+/*is the point of the shape captured*/
+
 let someFigureTaken = false;
 
 const drawPanel = document.getElementById('draw-panel');
@@ -22,7 +28,8 @@ const leftPanel = document.getElementById('left-panel');
 let svgPanel = document.getElementById('svg-panel');
 const svgNS = 'http://www.w3.org/2000/svg';
 
-/*Добавление всех инструментов в массив и присваивание обработчиков*/
+/*Add all the tools to the array and assign the handlers*/
+
 for (let i = 0; i < ids.length; i++) {
     instruments[i] = document.getElementById(ids[i]);
     instruments[i].addEventListener('click', function() { currentInstrument = this; });

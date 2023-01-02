@@ -1,4 +1,4 @@
-/* Скрипт для для копирования и вставки фигур с помощью Ctrl+C, Ctrl+V*/
+/* Script for copying and pasting figures with Ctrl+C, Ctrl+V */
 
 'use strict'
 
@@ -6,10 +6,10 @@ let newSvgFig;
 let constr;
 
 const copy = () => {
-    switch(constr.name) {
+    switch (constr.name) {
         case 'Rectangle':
-let el = createSVGElem('foreignObject', undefined, '#000000', 0);
-        el.innerHTML = `<div id="menuBG">
+            let el = createSVGElem('foreignObject', undefined, '#000000', 0);
+            el.innerHTML = `<div id="menuBG">
       <div class="border"></div>
     </div>`;
 
@@ -61,12 +61,12 @@ let el = createSVGElem('foreignObject', undefined, '#000000', 0);
 };
 
 document.addEventListener('keydown', (e) => {
-    if(e.ctrlKey && e.keyCode == 67 && currentFigure) {
+    if (e.ctrlKey && e.keyCode == 67 && currentFigure) {
         constr = currentFigure.constructor;
         copy();
     }
-    if(e.ctrlKey && e.keyCode == 86 && newSvgFig) {
-        if(constr.name !== 'Polygon'){
+    if (e.ctrlKey && e.keyCode == 86 && newSvgFig) {
+        if (constr.name !== 'Polygon') {
             currentFigure = constr.create(newSvgFig);
         } else {
             currentFigure = Polyline.create(newSvgFig);

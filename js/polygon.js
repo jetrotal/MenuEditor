@@ -1,11 +1,10 @@
-/*
-    Скрипт для создания многоугольника.
-    Создание аналогично остальным фигурам. При этом, если зажата клавиша shift,
-    то нижняя сторона многоугольника будет находиться в горизонтальном положении.
-    При помощи стрелок вверх и вниз можно изменять количество углов во время и после
-    создания многоугольника. Также после создания доступна клавиша alt, позволяющая
-    сохранить угол наклона фигуры, и ctrl, сохраняющая радиус неизменным.
-*/
+/*  A script for creating a polygon.
+    Creation is similar to the other shapes. At the same time, if you hold down the shift key,
+    then the bottom side of the polygon will be in a horizontal position.
+    With the up and down arrows you can change the number of corners during and after
+    of the polygon. Also, after creating a polygon, the alt key is available, allowing you to
+    key to save the angle of the shape, and ctrl, which keeps the radius unchanged. */
+
 'use strict';
 
 class Polygon extends Figure {
@@ -51,7 +50,7 @@ class Polygon extends Figure {
             const coords = getMouseCoords(e);
             if (e.shiftKey) {
                 const [dx, dy] = [coords.x - pg.center.x, coords.y - pg.center.y];
-                const radius = Math.sqrt(dx*dx + dy*dy);
+                const radius = Math.sqrt(dx * dx + dy * dy);
                 pg.moveFixedOnBottom(radius, 0);
                 options[1].value = pg.r;
                 return;
@@ -86,7 +85,8 @@ class Polygon extends Figure {
         const oldNumOfAngles = this.n;
         const options = optionsPolygon.getElementsByTagName('input');
         const clicked = getMouseCoords(event);
-        let ind = this.findIndexMerged(clicked), newInd = null;
+        let ind = this.findIndexMerged(clicked),
+            newInd = null;
         if (ind === undefined) {
             return;
         }
@@ -98,11 +98,11 @@ class Polygon extends Figure {
         }
         ind = 0;
 
-        const movePoint = ( (e) => {
+        const movePoint = ((e) => {
             const coords = getMouseCoords(e);
             if (e.altKey) {
                 const [dx, dy] = [coords.x - this.center.x, coords.y - this.center.y];
-                const radius = Math.sqrt(dx*dx + dy*dy);
+                const radius = Math.sqrt(dx * dx + dy * dy);
                 this.moveWithFixedAngeles(radius);
                 options[0].value = this.n;
                 options[1].value = this.r;
@@ -116,9 +116,9 @@ class Polygon extends Figure {
             this.moveUnfixed(coords, ind);
             options[0].value = this.n;
             options[1].value = this.r;
-        } ).bind(this);
+        }).bind(this);
 
-        const stopMoving = ( (e) => {
+        const stopMoving = ((e) => {
             this.deleteTmpCopy();
             this.somePointTaken = someFigureTaken = false;
             this.refPoints[ind].circle.setAttribute('fill', '#FFFFFF');
@@ -127,9 +127,9 @@ class Polygon extends Figure {
             document.removeEventListener("keydown", this.updateNumOfVerts);
             this.refPoints[ind].circle.addEventListener('mousedown', this.takePoint);
             drawPanel.removeEventListener('mouseup', stopMoving);
-        } ).bind(this);
+        }).bind(this);
 
-        const returnToOld = ( (e) => {
+        const returnToOld = ((e) => {
             if (e.keyCode == 27) {
                 if (this.n != oldNumOfAngles) {
                     const update = (this.n < oldNumOfAngles) ? this.increaseNumOfVerts : this.decreaseNumOfVerts;
@@ -140,7 +140,7 @@ class Polygon extends Figure {
                 movePoint(event);
                 stopMoving(e);
             }
-        } ).bind(this);
+        }).bind(this);
 
         this.createTmpCopy();
         this.somePointTaken = someFigureTaken = true;
@@ -159,7 +159,8 @@ class Polygon extends Figure {
 
         const move = (e) => {
             const coords = getMouseCoords(e);
-            const dx = coords.x - this.center.x, dy = coords.y - this.center.y;
+            const dx = coords.x - this.center.x,
+                dy = coords.y - this.center.y;
             for (let i = 0; i < this.n; i++) {
                 const point = { x: this.refPoints[i].x + dx, y: this.refPoints[i].y + dy };
                 this.refPoints[i].setCoords(point);
@@ -196,31 +197,31 @@ class Polygon extends Figure {
 
     moveFixedOnBottom(r, ind) {
         this.r = r;
-        const baseLen = Math.sqrt(2*r*r - 2*r*r*Math.cos((2*Math.PI)/this.n));
-        const h = Math.sqrt(r*r - baseLen*baseLen/4);
-        const start = { x: baseLen/2, y: h };
+        const baseLen = Math.sqrt(2 * r * r - 2 * r * r * Math.cos((2 * Math.PI) / this.n));
+        const h = Math.sqrt(r * r - baseLen * baseLen / 4);
+        const start = { x: baseLen / 2, y: h };
         this.changeVertices(start, ind);
     }
 
     moveWithFixedRadius(vertex, ind) {
         const start = { x: vertex.x - this.center.x, y: vertex.y - this.center.y };
-        const len = Math.sqrt(start.x*start.x + start.y*start.y);
-        [start.x, start.y] =  [(this.r/len)*start.x, (this.r/len)*start.y];
+        const len = Math.sqrt(start.x * start.x + start.y * start.y);
+        [start.x, start.y] = [(this.r / len) * start.x, (this.r / len) * start.y];
         this.changeVertices(start, ind);
     }
 
     moveUnfixed(vertex, ind) {
         const start = { x: vertex.x - this.center.x, y: vertex.y - this.center.y };
-        this.r = Math.sqrt(start.x*start.x + start.y*start.y);
+        this.r = Math.sqrt(start.x * start.x + start.y * start.y);
         this.changeVertices(start, ind);
     }
 
     changeVertices(start, ind) {
         const [dx, dy] = [this.center.x, this.center.y];
-        const deg = (2*Math.PI)/this.n;
+        const deg = (2 * Math.PI) / this.n;
         for (let i = 0; i < this.n; i++) {
-            const x = start.x*Math.cos(i*deg) - start.y*Math.sin(i*deg);
-            const y = start.x*Math.sin(i*deg) + start.y*Math.cos(i*deg);
+            const x = start.x * Math.cos(i * deg) - start.y * Math.sin(i * deg);
+            const y = start.x * Math.sin(i * deg) + start.y * Math.cos(i * deg);
             this.refPoints[(ind + i) % this.n].setCoords({ x: x + dx, y: y + dy });
         }
     }
@@ -228,8 +229,8 @@ class Polygon extends Figure {
     moveWithFixedAngeles(newRadius) {
         for (let i = 0; i < this.n; i++) {
             const point = { x: this.refPoints[i].x, y: this.refPoints[i].y };
-            point.x = (newRadius/this.r)*(point.x - this.center.x) + this.center.x;
-            point.y = (newRadius/this.r)*(point.y - this.center.y) + this.center.y;
+            point.x = (newRadius / this.r) * (point.x - this.center.x) + this.center.x;
+            point.y = (newRadius / this.r) * (point.y - this.center.y) + this.center.y;
             this.refPoints[i].setCoords(point);
         }
         this.r = newRadius;
@@ -253,7 +254,7 @@ class Polygon extends Figure {
             svgPanel.appendChild(this.refPoints[this.refPoints.length - 1].circle);
         }
         this.n++
-        this.moveUnfixed(this.refPoints[0], 0);
+            this.moveUnfixed(this.refPoints[0], 0);
     }
 
     decreaseNumOfVerts() {
@@ -295,7 +296,7 @@ class Polygon extends Figure {
 
 class PolygonPoint extends RefPoint {
     constructor(figure, coords, ind) {
-        super(figure, coords,polygon);
+        super(figure, coords, polygon);
         this.svgPoint = figure.svgFig.points[ind];
 
         this.circle.addEventListener('mousedown', this.figure.takePoint.bind(this.figure));
@@ -318,8 +319,8 @@ drawPanel.addEventListener('mousedown', Polygon.draw = Polygon.draw.bind(Polygon
             n = 3;
         }
         if (currentFigure.n != n) {
-            const update = (currentFigure.n < n) ? currentFigure.increaseNumOfVerts
-                                            : currentFigure.decreaseNumOfVerts;
+            const update = (currentFigure.n < n) ? currentFigure.increaseNumOfVerts :
+                currentFigure.decreaseNumOfVerts;
             while (currentFigure.n != n) {
                 update();
             }

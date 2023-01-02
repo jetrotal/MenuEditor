@@ -1,6 +1,5 @@
-/*
-    Скрипт для создания эллипса. Полностью основан на скрипте для прямоугольника.
-*/
+/*script for creating ellipse. It is based on script for rectangle.*/
+
 'use strict';
 
 class Ellipse extends Figure {
@@ -11,18 +10,19 @@ class Ellipse extends Figure {
 
     static create(svgFigure) {
         const get = attr => svgFigure.getAttribute(attr);
-        let fig = svgFigure, cx, cy, width, height;
+        let fig = svgFigure,
+            cx, cy, width, height;
         [cx, cy] = [+get('cx'), +get('cy')];
         if (svgFigure.tagName == 'circle') {
             fig = createSVGElem('ellipse');
             copySVGStyle(fig, svgFigure);
-            width = height = 2*get('r');
+            width = height = 2 * get('r');
         } else {
-            [width, height] = [2*get('rx'), 2*get('ry')];
+            [width, height] = [2 * get('rx'), 2 * get('ry')];
         }
 
         const ell = new Ellipse(fig);
-        ell.rect.setAttrs([cx - width/2, cy - height/2, width, height]);
+        ell.rect.setAttrs([cx - width / 2, cy - height / 2, width, height]);
         ell.synchronizeWithRect();
         ell.finish();
         svgPanel.appendChild(ell.svgFig);
@@ -120,7 +120,7 @@ class Ellipse extends Figure {
 
     synchronizeWithRect() {
         ({ x: this.x, y: this.y } = this.rect.c);
-        [this.rx, this.ry] = [this.rect.width/2, this.rect.height/2];
+        [this.rx, this.ry] = [this.rect.width / 2, this.rect.height / 2];
     }
 
     createTmpCopy() {
@@ -136,8 +136,8 @@ class Ellipse extends Figure {
         hideAllOptions();
         optionsEllipse.classList.add('show-option');
         const options = optionsEllipse.getElementsByTagName('input');
-        options[0].value = 2*this.ry;
-        options[1].value = 2*this.rx;
+        options[0].value = 2 * this.ry;
+        options[1].value = 2 * this.rx;
     }
 
     set x(v) { this.svgFig.setAttribute('cx', v); }

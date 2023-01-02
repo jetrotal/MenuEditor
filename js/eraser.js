@@ -1,11 +1,11 @@
+/*"Script for the tool "Eraser"*/
+
 'use strict';
-/*
-    Скрипт для инструмента ластик.
-*/
 
 let eraser = document.getElementById('eraser');
 let isErasing = false;
-let end, strt, type, value, index = 0, Path1, Path2, currentPath,pathColor;
+let end, strt, type, value, index = 0,
+    Path1, Path2, currentPath, pathColor;
 
 const startErasing = () => {
 
@@ -20,8 +20,8 @@ const dist = (x1, y1, x2, y2) => {
 };
 
 
-const changeEraserThickness = ()=>{
-    value=document.getElementById('eraser_width').value/2;
+const changeEraserThickness = () => {
+    value = document.getElementById('eraser_width').value / 2;
 };
 
 
@@ -30,9 +30,9 @@ const parseP = (x, y, path) => {
     end = 0;
     strt = 0;
     for (let i = 0; i + 2 < path.length;) {
-        if (((x >= (path[i] - 1) && x <= (path[i + 2] + 1))
-            || (x <= (path[i] + 1) && x >= (path[i + 2] - 1))) && ((y >= (path[i + 1] - 1) && y <= (path[i + 3] + 1))
-            || (y <= (path[i + 1] + 1) && y >= (path[i + 3] - 1)))) {
+        if (((x >= (path[i] - 1) && x <= (path[i + 2] + 1)) ||
+                (x <= (path[i] + 1) && x >= (path[i + 2] - 1))) && ((y >= (path[i + 1] - 1) && y <= (path[i + 3] + 1)) ||
+                (y <= (path[i + 1] + 1) && y >= (path[i + 3] - 1)))) {
             index = i;
             break;
         }
@@ -45,12 +45,13 @@ const parseP = (x, y, path) => {
 
 const e = (path, x, y) => {
     changeEraserThickness();
-    let l = index, r = index + 2;
+    let l = index,
+        r = index + 2;
     while (dist(x, y, path[l], path[l + 1]) < value && l > 0) {
         l -= 2;
     }
-    while ((dist(x, y, path[r], path[r + 1]) < value
-        || (path[r] === path[l] && path[r + 1] === path[l + 1])) && r < path.length - 2) {
+    while ((dist(x, y, path[r], path[r + 1]) < value ||
+            (path[r] === path[l] && path[r + 1] === path[l + 1])) && r < path.length - 2) {
         r += 2;
     }
     if (l < 0)
@@ -58,14 +59,14 @@ const e = (path, x, y) => {
     if (r > path.length - 2)
         r = path.length - 2;
     let k;
-    if (pathLength(path) < 2*value) {
+    if (pathLength(path) < 2 * value) {
         currentPath.remove();
         index = -1;
         return;
     }
-    if (pl(path.slice(0, l+2),x,y) < value) {
+    if (pl(path.slice(0, l + 2), x, y) < value) {
         strt = 1;
-    } else if (pr(path.slice(r, path.length),x,y) < value) {
+    } else if (pr(path.slice(r, path.length), x, y) < value) {
         end = 1;
     }
     let dis = dist(x, y, path[l], path[l + 1]);
@@ -79,12 +80,12 @@ const e = (path, x, y) => {
         Path1 = 'M ' + path.slice(0, 2).join(' ') + ' L ' + path.slice(2, l + 2).join(' ') + ' ' + (path[l] + (x - path[l]) * k) + ' ' + (path[l + 1] + (y - path[l + 1]) * k);
         dis = dist(x, y, path[r], path[r + 1]);
         k = (dis - value) / dis;
-        Path2 = 'M ' + (path[r] - (path[r]-x) * k) + ' ' +  (path[r + 1] - (path[r + 1]-y) * k) + ' L ' + path.slice(r).join(' ');
+        Path2 = 'M ' + (path[r] - (path[r] - x) * k) + ' ' + (path[r + 1] - (path[r + 1] - y) * k) + ' L ' + path.slice(r).join(' ');
     }
 };
 
 
-const pathLength=(path) => {
+const pathLength = (path) => {
     let l = 0;
     for (let i = 0; i < path.length - 3; i += 2) {
         l += dist(path[i], path[i + 1], path[i + 2], path[i + 3]);
@@ -93,9 +94,9 @@ const pathLength=(path) => {
 };
 
 
-const pl=(path,x,y) => {
+const pl = (path, x, y) => {
     let l = 0;
-    path.push(x,y);
+    path.push(x, y);
     for (let i = 0; i < path.length - 3; i += 2) {
         l += dist(path[i], path[i + 1], path[i + 2], path[i + 3]);
     }
@@ -103,9 +104,9 @@ const pl=(path,x,y) => {
 };
 
 
-const pr=(path,x,y) => {
+const pr = (path, x, y) => {
     let l = 0;
-    path.unshift(x,y);
+    path.unshift(x, y);
     for (let i = 0; i < path.length - 3; i += 2) {
         l += dist(path[i], path[i + 1], path[i + 2], path[i + 3]);
     }
@@ -162,7 +163,3 @@ function stopErasing() {
 drawPanel.addEventListener('mousedown', startErasing);
 drawPanel.addEventListener('mousemove', erase);
 drawPanel.addEventListener('mouseup', stopErasing);
-
-
-
-

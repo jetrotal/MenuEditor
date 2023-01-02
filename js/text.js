@@ -1,28 +1,28 @@
 /*
-    Скрипт нужен для создания области пользовательского ввода текста.
-    Нажатием ЛКМ, на холсте, можно создать только первую область.
-    Для дальнейшего же создания требуется сочетание Ctrl + ЛКМ, при этом обасть создается в точке нажатия с размерами по умолчанию(336 : 200)px;
-    Также, можно перемещать и менять размеры данной области.
-    Используется скрипт прямоугольника.
-    Строка автоматически переходит на новую, если она достигла границы области.
-    Также, при помощи панели опций можно менять сам шрифт, размер шрифта, цвет.
-    По умолчанию параметры:
-    шрифт— Arial;
-    размер шрифта— 12pt;
-    цвет—черный.
-    Редактировать текст можно только при выборе опции курсора или текста.
-    В дополнение, имеется возможность использовать горячие сочетания клавиш:
-    Ctrl + B —полужирный (тег STRONG).
-    Ctrl + I —курсив (тег EM).
-    Ctrl + U —подчеркнутый (тег U).
-    Ctrl + Z —отмена последнего действия.
+    The script is needed to create a custom text input area.
+    By pressing the LKM, on the canvas, you can create only the first area.
+    Further creation requires Ctrl + LKM, and the area is created at the clicked point with default dimensions (336 : 200)px;
+    Also, you can move and resize this area.
+    A rectangle script is used.
+    The line automatically moves to a new one if it has reached the border of the area.
+    Also, you can change the font itself, font size, and color by using the options panel.
+    The default settings are:
+    font- Arial;
+    font size- 12pt;
+    color-black.
+    The text can be edited only when the cursor or text option is selected.
+    In addition, it's possible to use hotkeys:
+    Ctrl + B-bold (STRONG tag).
+    Ctrl + I - italic (tag EM).
+    Ctrl + U - underlined (tag U).
+    Ctrl + Z - cancel the last action.
 */
 'use strict';
 
 const text = document.getElementById('text');
 
 const createSVG_Text = (f = 'none', s = '#000000', sw = '3', so = '1', fo = '1') => {
-    const textForeignObject = createSVGElem('foreignObject', f, s ,sw, so, fo);
+    const textForeignObject = createSVGElem('foreignObject', f, s, sw, so, fo);
     const textDiv = document.createElement('div');
     textDiv.setAttribute('contenteditable', true);
     textDiv.style.overflow = 'hidden';
@@ -43,11 +43,11 @@ class TextBox extends Figure {
     static create(TextObject) {
         const get = attr => TextObject.getAttribute(attr);
         let tbox = new TextBox(TextObject);
-        tbox.div=TextObject.getElementsByTagName('div')[0];
-        tbox.rect.height=TextObject.getAttribute('height');
-        tbox.rect.width=TextObject.getAttribute('width');
-        tbox.rect.x=get('x');
-        tbox.rect.y=get('y');
+        tbox.div = TextObject.getElementsByTagName('div')[0];
+        tbox.rect.height = TextObject.getAttribute('height');
+        tbox.rect.width = TextObject.getAttribute('width');
+        tbox.rect.x = get('x');
+        tbox.rect.y = get('y');
         tbox.rect.center.setCoords(tbox.rect.c);
         tbox.rect.center.setCoords(tbox.rect.c);
         tbox.synchronizeWithRect();
@@ -70,11 +70,11 @@ class TextBox extends Figure {
         tbox.rect.createTmpCopy = tbox.createTmpCopy.bind(tbox);
         tbox.rect.deleteTmpCopy = tbox.deleteTmpCopy.bind(tbox);
         tbox.finished = tbox.rect.finished = true;
-        document.addEventListener('click', () =>  {
-            if(text.checked || cursor.checked) {
+        document.addEventListener('click', () => {
+            if (text.checked || cursor.checked) {
                 tbox.div.setAttribute('contenteditable', 'true');
             } else {
-                if(svgPanel.compareDocumentPosition(tbox.rect.svgFig) & 16) {
+                if (svgPanel.compareDocumentPosition(tbox.rect.svgFig) & 16) {
                     svgPanel.removeChild(tbox.rect.svgFig);
                     tbox.rect.hideRefPoints();
                     tbox.hideOrShow();
@@ -89,8 +89,8 @@ class TextBox extends Figure {
             }
         });
         tbox.div.addEventListener('click', () => {
-            if(!cursor.checked) {
-                if(svgPanel.compareDocumentPosition(tbox.rect.svgFig) & 16) {
+            if (!cursor.checked) {
+                if (svgPanel.compareDocumentPosition(tbox.rect.svgFig) & 16) {
                     svgPanel.removeChild(tbox.rect.svgFig);
                     tbox.rect.hideRefPoints();
                     tbox.hideOrShow();
@@ -101,7 +101,7 @@ class TextBox extends Figure {
     }
 
     static draw(event) {
-        if (!text.checked || (svgPanel.getElementsByTagName('foreignObject')[0] && !event.ctrlKey) ) {
+        if (!text.checked || (svgPanel.getElementsByTagName('foreignObject')[0] && !event.ctrlKey)) {
             return;
         }
 
@@ -145,11 +145,11 @@ class TextBox extends Figure {
         tbox.rect.deleteTmpCopy = tbox.deleteTmpCopy.bind(tbox);
         tbox.finished = tbox.rect.finished = true;
 
-        document.addEventListener('click', () =>  {
-            if(text.checked || cursor.checked) {
+        document.addEventListener('click', () => {
+            if (text.checked || cursor.checked) {
                 tbox.div.setAttribute('contenteditable', 'true');
             } else {
-                if(svgPanel.compareDocumentPosition(tbox.rect.svgFig) & 16) {
+                if (svgPanel.compareDocumentPosition(tbox.rect.svgFig) & 16) {
                     svgPanel.removeChild(tbox.rect.svgFig);
                     tbox.rect.hideRefPoints();
                     tbox.hideOrShow();
@@ -164,8 +164,8 @@ class TextBox extends Figure {
             }
         });
         tbox.div.addEventListener('click', () => {
-            if(!cursor.checked) {
-                if(svgPanel.compareDocumentPosition(tbox.rect.svgFig) & 16) {
+            if (!cursor.checked) {
+                if (svgPanel.compareDocumentPosition(tbox.rect.svgFig) & 16) {
                     svgPanel.removeChild(tbox.rect.svgFig);
                     tbox.rect.hideRefPoints();
                     tbox.hideOrShow();
@@ -180,7 +180,7 @@ class TextBox extends Figure {
     }
 
     hideRefPoints() {
-        if(svgPanel.compareDocumentPosition(this.rect.svgFig) & 16){
+        if (svgPanel.compareDocumentPosition(this.rect.svgFig) & 16) {
             svgPanel.removeChild(this.rect.svgFig);
             this.rect.hideRefPoints();
         }
@@ -203,7 +203,7 @@ class TextBox extends Figure {
     }
 
     showOptions() {
-        if(text.checked || cursor.checked) {
+        if (text.checked || cursor.checked) {
             hideAllOptions();
             optionsText.classList.add('show-option');
         }
@@ -251,17 +251,17 @@ drawPanel.addEventListener('mousedown', TextBox.draw = TextBox.draw.bind(TextBox
 
     const changeFont = (fontSizeValue) => {
         let browserFontSizeValue = '';
-        if(fontSizeValue == 7) {
+        if (fontSizeValue == 7) {
             browserFontSizeValue += 1;
-        } else if(fontSizeValue == 10) {
+        } else if (fontSizeValue == 10) {
             browserFontSizeValue += 2;
-        } else if(fontSizeValue == 12) {
+        } else if (fontSizeValue == 12) {
             browserFontSizeValue += 3;
-        } else if(fontSizeValue == 14) {
+        } else if (fontSizeValue == 14) {
             browserFontSizeValue += 4;
-        } else if(fontSizeValue == 18) {
+        } else if (fontSizeValue == 18) {
             browserFontSizeValue += 5;
-        } else if(fontSizeValue == 22) {
+        } else if (fontSizeValue == 22) {
             browserFontSizeValue += 6;
         } else browserFontSizeValue += 7;
         document.execCommand("fontSize", false, browserFontSizeValue);

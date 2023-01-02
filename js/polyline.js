@@ -1,22 +1,22 @@
 /*
-        Скрипт для работы инструмента "Перо" и расширения возможностей "Курсора."
-        Принцип работы "Пера":
-    При первом клике ЛКМ на холсте устанавливается начальная точка.
-    Далее, при перемещении мыши рисуется полупрозрачный отрезок от последней
-    установленной точки до той, на которую в данный момент указывает курсор.
-        Процесс построения фигуры оканчивается в одном из трех случаев:
-    1) В качестве следующей опорной точки была выбрана начальная;
-    2) При фиксировании опорной точки была зажата клавиша Ctrl;
-    3) Смена инструмента.
-        В панеле опций для фигуры можно выбрать толщину ребер, цвет ребер, наличие
-    заливки, ее цвет(если она есть), прозрачность.
-    Добавленные возможности "Курсора":
-        Фигуру можно перемещать путем зажатия ЛКМ над ней.
-        Возможность перемещать и удалять опорные точки:
-    Для перемещения точки необходимо захватить ее одним кликом ЛКМ, затем
-    переместить и снова кликнуть ЛКМ. Для удаления нужно нажать на опорную точку ПКМ.
-    Если при захвате опорной точки был изменен инструмент, то она вернется на
-    свою исходную позицию.
+        A script for operating the "Pen" tool and extending the capabilities of the "Cursor".
+        How the "Pen" tool works:
+    The first click with the left mouse button sets the initial point on the canvas.
+    Then, when you move the mouse, the tool draws a semi-transparent line from the last point
+    point to the point you were last clicked.
+        The process of drawing the figure ends in one of three cases:
+    1) The starting point has been selected as the next reference point;
+    2) the Ctrl key was pressed while fixing the reference point;
+    3) A tool change.
+        In the options panel for a shape you can choose the thickness of the edges, the color of the edges, the presence of
+    fill, fill color (if any), transparency.
+    Added Cursor options:
+        A shape can be moved by holding the LKM over it.
+        Ability to move and delete anchor points:
+    To move a point, you need to grab it with a single LMB click, then
+    then move it and left-click again. To delete an anchor point, click the point with the left mouse button.
+    If the tool was changed during capture of the reference point, it will return to
+    to its initial position.
 */
 'use strict';
 
@@ -230,7 +230,8 @@ class Polyline extends Figure {
 
         const move = (e) => {
             const coords = getMouseCoords(e);
-            const dx = coords.x - clicked.x, dy = coords.y - clicked.y;
+            const dx = coords.x - clicked.x,
+                dy = coords.y - clicked.y;
             for (let i = 0; i < this.refPoints.length; i++) {
                 const point = { x: old[i].x + dx, y: old[i].y + dy };
                 this.refPoints[i].setCoords(point);
@@ -301,7 +302,7 @@ class Polyline extends Figure {
             appendAll(1, 0, this.refPoints.length - 1);
         } else if (this.isClosed() && indOfTaken == this.refPoints.length - 1) {
             appendAll(0, this.refPoints.length - 1, this.refPoints.length - 2);
-        }else if (indOfTaken == 0) {
+        } else if (indOfTaken == 0) {
             appendAll(0, 1);
         } else {
             appendAll(this.refPoints.length - 1, this.refPoints.length - 2);

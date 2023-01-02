@@ -1,8 +1,6 @@
-/*
-    Инструмент пипетка
+/*Color Picker Tool
+converts svgPanel to Canvas, defines the color of the pixel*/
 
-    Переводит svgPanel в Canvas, определяет цвет пикселя
- */
 
 'use strict';
 
@@ -18,14 +16,14 @@ backPanel.onmousemove = (event) => {
     const coord = getBoxCoords(drawPanel);
 
     if (coord.left >= event.pageX || coord.top >= event.pageY ||
-        svgPanel.getAttribute('width')  + coord.left <= event.pageX ||
-        svgPanel.getAttribute('height') + coord.top  <= event.pageY) {
-            clear();
-            return;
+        svgPanel.getAttribute('width') + coord.left <= event.pageX ||
+        svgPanel.getAttribute('height') + coord.top <= event.pageY) {
+        clear();
+        return;
     }
 
     clear();
-    const rect = createSVGElem('rect', getColor(event), invertColor( getColor(event) ), 1.2);
+    const rect = createSVGElem('rect', getColor(event), invertColor(getColor(event)), 1.2);
     const click = getMouseCoords(event);
 
     rect.setAttribute('x', click.x + 20);
@@ -62,7 +60,7 @@ const getColor = (event) => {
     canvas.width = img.width;
     canvas.height = img.height;
     ctx.drawImage(img, 0, 0, img.width, img.height);
-    
+
     const click = getMouseCoords(event);
     const data = ctx.getImageData(click.x, click.y, 1, 1).data;
 

@@ -1,4 +1,5 @@
-/*Скрипт для работы инструмента "Прямая"*/
+/*"Script for the tool "Line"*/
+
 'use strict';
 
 class Line extends Figure {
@@ -48,7 +49,7 @@ class Line extends Figure {
             obj.moveByAngeles(click, current);
             const dx = current.x - click.x;
             const dy = current.y - click.y;
-            options[1].value = Math.sqrt(dx*dx + dy*dy);
+            options[1].value = Math.sqrt(dx * dx + dy * dy);
         };
 
         const stopMoving = () => {
@@ -68,7 +69,7 @@ class Line extends Figure {
         document.addEventListener('mousemove', moveLine);
         drawPanel.addEventListener('mouseup', stopMoving);
     }
-        
+
     erase(event) {
         if (!eraser.checked) return;
         isErasing = true;
@@ -79,7 +80,7 @@ class Line extends Figure {
 
         const calcPointToCut = (src, dest, eraserCoord) => {
             const temp = (dest.x - src.x) / (dest.y - src.y);
-            const y = (eraserCoord.x - src.x + eraserCoord.y/temp + temp*src.y) / (temp + 1/temp);
+            const y = (eraserCoord.x - src.x + eraserCoord.y / temp + temp * src.y) / (temp + 1 / temp);
             const x = temp * (y - src.y) + src.x;
             return { x: x, y: y };
         }
@@ -87,23 +88,25 @@ class Line extends Figure {
         const getDist = (src, dest) => {
             const dx = dest.x - src.x;
             const dy = dest.y - src.y;
-            return Math.sqrt(dx*dx + dy*dy);
+            return Math.sqrt(dx * dx + dy * dy);
         }
-        
+
         const options = optionsEraser.getElementsByTagName('input');
         const current = getMouseCoords(event);
         const width = options[0].value / 2;
-        const eraserCoords = [ { x: current.x - width, y: current.y + width },
-                               { x: current.x + width, y: current.y + width },
-                               { x: current.x + width, y: current.y - width },
-                               { x: current.x - width, y: current.y - width } ];
+        const eraserCoords = [{ x: current.x - width, y: current.y + width },
+            { x: current.x + width, y: current.y + width },
+            { x: current.x + width, y: current.y - width },
+            { x: current.x - width, y: current.y - width }
+        ];
 
-        let min1 = this.length, min2 = this.length;
-        let point1 = { x: 0, y: 0 }, point2 = { x: 0, y: 0 };
+        let min1 = this.length,
+            min2 = this.length;
+        let point1 = { x: 0, y: 0 },
+            point2 = { x: 0, y: 0 };
         for (let i = 0; i < eraserCoords.length; i++) {
-            const point = calcPointToCut({ x: this.x1, y: this.y1 },
-                                         { x: this.x2, y: this.y2 },
-                                         eraserCoords[i]);
+            const point = calcPointToCut({ x: this.x1, y: this.y1 }, { x: this.x2, y: this.y2 },
+                eraserCoords[i]);
             const dist1 = getDist({ x: this.x1, y: this.y1 }, point);
             if (min1 > dist1) {
                 min1 = dist1;
@@ -124,8 +127,10 @@ class Line extends Figure {
         if (minX <= point1.x && point1.x <= maxX && minY <= point1.y && point1.y <= maxY) {
             const obj = Line.create(createSVGElem('line'));
             copySVGStyle(obj.svgFig, this.svgFig);
-            obj.x1 = this.x1;    obj.y1 = this.y1;
-            obj.x2 = point1.x;   obj.y2 = point1.y;
+            obj.x1 = this.x1;
+            obj.y1 = this.y1;
+            obj.x2 = point1.x;
+            obj.y2 = point1.y;
             svgPanel.appendChild(obj.svgFig);
             obj.updateRefPointsCoords();
         }
@@ -133,8 +138,10 @@ class Line extends Figure {
         if (minX <= point2.x && point2.x <= maxX && minY <= point2.y && point2.y <= maxY) {
             const obj = Line.create(createSVGElem('line'));
             copySVGStyle(obj.svgFig, this.svgFig);
-            obj.x1 = point2.x;   obj.y1 = point2.y;
-            obj.x2 = this.x2;    obj.y2 = this.y2;
+            obj.x1 = point2.x;
+            obj.y1 = point2.y;
+            obj.x2 = this.x2;
+            obj.y2 = this.y2;
             svgPanel.appendChild(obj.svgFig);
             obj.updateRefPointsCoords();
         }
@@ -152,11 +159,12 @@ class Line extends Figure {
         const oldAttrs = [this.x1, this.y1, this.x2, this.y2];
         const options = optionsLine.getElementsByTagName('input');
         const clicked = getMouseCoords(event);
-        let ind = this.findIndexMerged(clicked), newInd = null;
+        let ind = this.findIndexMerged(clicked),
+            newInd = null;
         if (ind === undefined) return;
         const symInd = this.findIndexMerged(this.getSymmetrical(clicked));
-        const pushed = {x: this.refPoints[ind].x, y: this.refPoints[ind].y};
-        let fixed = {x: this.refPoints[symInd].x, y: this.refPoints[symInd].y};
+        const pushed = { x: this.refPoints[ind].x, y: this.refPoints[ind].y };
+        let fixed = { x: this.refPoints[symInd].x, y: this.refPoints[symInd].y };
         const [horizontal, angelPushed] = [pushed.y == fixed.y, !(pushed.y == fixed.y || pushed.x == fixed.x)];
 
         const movePoint = ((event) => {
@@ -251,7 +259,7 @@ class Line extends Figure {
     }
 
     updateRefPointsCoords() {
-        const update = (ind, x, y) => this.refPoints[ind].setCoords({x: x, y: y});
+        const update = (ind, x, y) => this.refPoints[ind].setCoords({ x: x, y: y });
         const [x1, y1, x2, y2] = [this.x1, this.y1, this.x2, this.y2];
         update(0, x1, y1);
         update(1, x2, y2);
@@ -282,8 +290,8 @@ class Line extends Figure {
 
     getSymmetrical(point) {
         return {
-            x: 2*this.c.x - point.x,
-            y: 2*this.c.y - point.y
+            x: 2 * this.c.x - point.x,
+            y: 2 * this.c.y - point.y
         };
     }
 
@@ -313,7 +321,7 @@ class Line extends Figure {
     get y1() { return +this.svgFig.getAttribute('y1'); }
     get x2() { return +this.svgFig.getAttribute('x2'); }
     get y2() { return +this.svgFig.getAttribute('y2'); }
-    get  c() { return {x: (this.x1 + this.x2)/2, y: (this.y1 + this.y2)/2}; }
+    get c() { return { x: (this.x1 + this.x2) / 2, y: (this.y1 + this.y2) / 2 }; }
     get length() {
         const dx = this.x2 - this.x1;
         const dy = this.y2 - this.y1;
@@ -322,7 +330,7 @@ class Line extends Figure {
 }
 
 class LinePoint extends RefPoint {
-    constructor(obj, coords = {x: 0, y: 0}) {
+    constructor(obj, coords = { x: 0, y: 0 }) {
         super(obj, coords, line);
         this.circle.addEventListener('mousedown', this.figure.takePoint.bind(this.figure));
     }
